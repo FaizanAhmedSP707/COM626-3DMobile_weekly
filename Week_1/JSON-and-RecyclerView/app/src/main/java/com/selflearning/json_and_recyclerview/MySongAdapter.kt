@@ -24,7 +24,7 @@ class MySongAdapter(var songs: List<Song>,
         val myViewHolder = holder as MyViewHolder
         // Use the single list of songs to display different data in different TextViews inside the RecyclerView
         myViewHolder.tvSongName.text = songs[index].title
-        myViewHolder.tvSongDesc.text = songs[index].artist + songs[index].year
+        myViewHolder.tvSongDesc.text = songs[index].artist + ", " +songs[index].year
 
         /*
         For displaying a message using a Toast, we need to have a callback with an integer
