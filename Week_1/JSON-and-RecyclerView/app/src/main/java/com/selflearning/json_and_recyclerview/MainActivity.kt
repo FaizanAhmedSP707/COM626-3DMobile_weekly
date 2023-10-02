@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
                 val artistName = nameEntry.text.toString()
 
                 // Use 10.0.2.2:3000 when running the server on the same machine as the app
-                val url = "http://192.168.243.222:3000/artist/${artistName}"
+                val url = "http://10.0.2.2:3000/artist/${artistName}"
                 url.httpGet().responseObject<List<Song>> { request, response, result ->
 
                     when(result) {
