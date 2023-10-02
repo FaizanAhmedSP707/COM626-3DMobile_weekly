@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         to move it outside of the parentheses. This is done so that your code looks
         much cleaner and easier to read.
         */
-        songListView.adapter = MySongAdapter(songsList) {}
+        songListView.adapter = MySongAdapter(songsList) {Toast.makeText(this, "${songsList[it].title}, ${songsList[it].artist}, ${songsList[it].year}", Toast.LENGTH_LONG).show()}
 
         val nameEntry = findViewById<EditText>(R.id.songArtistSearchName)
         val songSearchBtn = findViewById<Button>(R.id.searchSongArtistBtn)
