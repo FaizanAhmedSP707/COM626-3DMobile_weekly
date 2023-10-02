@@ -6,14 +6,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class MySongAdapter(var songTitles: MutableList<String>,
-                    var songDescriptions: MutableList<String>,
+class MySongAdapter(var songs: List<Song>,
                     val callback: (Int) -> Unit):
         RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvSongName = itemView.findViewById(R.id.SongNameTextView) as TextView
-        val tvSongDescription = itemView.findViewById(R.id.SongDescriptionTextView) as TextView
+        val tvSongName = itemView.findViewById(R.id.SongTitleTextView) as TextView
+        val tvSongDesc = itemView.findViewById(R.id.SongDescriptionTextView) as TextView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -23,8 +22,9 @@ class MySongAdapter(var songTitles: MutableList<String>,
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, index: Int) {
         val myViewHolder = holder as MyViewHolder
-        myViewHolder.tvSongName.text = songTitles[index]
-        myViewHolder.tvSongDescription.text = songDescriptions[index]
+        // Use the single list of songs to display different data in different TextViews inside the RecyclerView
+        myViewHolder.tvSongName.text = songs[index].title
+        myViewHolder.tvSongDesc.text = songs[index].artist + songs[index].year
 
         /*
         For displaying a message using a Toast, we need to have a callback with an integer
@@ -35,6 +35,6 @@ class MySongAdapter(var songTitles: MutableList<String>,
     }
 
     override fun getItemCount(): Int {
-        return songTitles.size
+        return songs.size
     }
 }
