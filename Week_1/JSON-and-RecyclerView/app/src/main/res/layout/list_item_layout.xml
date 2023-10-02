@@ -7,8 +7,15 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/SongDetailTextView"
+        android:id="@+id/SongTitleTextView"
         android:textSize="12pt"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/SongDescriptionTextView"
+        android:textSize="10pt"
         />
 
 </LinearLayout>
