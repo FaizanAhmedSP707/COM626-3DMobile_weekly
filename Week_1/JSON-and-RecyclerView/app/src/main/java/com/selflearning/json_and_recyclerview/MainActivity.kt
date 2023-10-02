@@ -19,15 +19,30 @@ import android.view.MenuItem
 import android.view.Menu
 import android.view.MenuInflater
 
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Creating the adapter object here
+        val songListView = findViewById<RecyclerView>(R.id.webSongDataDisplay)
+        songListView.layoutManager = LinearLayoutManager(this)
+
+        var songsList = listOf<Song>()
+        /*
+        When a lambda function is the last parameter for an object, it is recommended
+        to move it outside of the parentheses. This is done so that your code looks
+        much cleaner and easier to read.
+        */
+        songListView.adapter = MySongAdapter(songsList) {}
+
         val nameEntry = findViewById<EditText>(R.id.songArtistSearchName)
         val songSearchBtn = findViewById<Button>(R.id.searchSongArtistBtn)
-        val resultView = findViewById<TextView>(R.id.webTextDisplay)
-        resultView.movementMethod = ScrollingMovementMethod()
+        //val resultView = findViewById<TextView>(R.id.webTextDisplay)
+        //resultView.movementMethod = ScrollingMovementMethod()
         // Button listener that will send requests to the server
         songSearchBtn.setOnClickListener {
 
