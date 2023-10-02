@@ -21,6 +21,7 @@ import android.view.MenuInflater
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.app.AlertDialog
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,7 +77,10 @@ class MainActivity : AppCompatActivity() {
 
                         is Result.Failure -> {
                             // Failure is when there is an HTTP error
-                            resultView.text = "ERROR ${result.error.message}"
+                            AlertDialog.Builder(this)
+                                .setNeutralButton("OK", null)
+                                .setMessage("A network error occurred: ${result.error.message}")
+                                .show()
                         }
                     }
                 }
