@@ -37,7 +37,8 @@ class MainActivity : AppCompatActivity() {
         to move it outside of the parentheses. This is done so that your code looks
         much cleaner and easier to read.
         */
-        songListView.adapter = MySongAdapter(songsList) {Toast.makeText(this, "${songsList[it].title}, ${songsList[it].artist}, ${songsList[it].year}", Toast.LENGTH_LONG).show()}
+        val myAdapter = MySongAdapter(songsList) {Toast.makeText(this, "${songsList[it].title}, ${songsList[it].artist}, ${songsList[it].year}", Toast.LENGTH_LONG).show()}
+        songListView.adapter = myAdapter
 
         val nameEntry = findViewById<EditText>(R.id.songArtistSearchName)
         val songSearchBtn = findViewById<Button>(R.id.searchSongArtistBtn)
@@ -64,21 +65,13 @@ class MainActivity : AppCompatActivity() {
                             // Parsing not done right now, we'll just be displaying raw data
                             //resultView.text = result.get().decodeToString()
 
-                            // Parsing done using GSON
-                            val displaytext = result.get().map {
-                                "${it.title} by ${it.artist}, " +
-                                        "ID: ${it.ID}, \n" +
-                                        "Day: ${it.day}, " +
-                                        "Month: ${it.month}, " +
-                                        "Year: ${it.year}, \n" +
-                                        "Chart: ${it.chart}, " +
-                                        "Likes: ${it.likes}, " +
-                                        "Downloads: ${it.downloads}, " +
-                                        "Quantity: ${it.quantity}, \n" +
-                                        "Review: ${it.review}" + "\n"
-                            }.joinToString("\n")
-                            // Set the text to the TextView
-                            resultView.text = displaytext
+                            // Setting the variable 'songs' to the list obtained from the web search
+                            myAdapter.songs = result.get()
+
+                            // We also need to tell the adapter to update itself with new data
+                            // when you perform a new song search so that the RecyclerView gets redrawn
+                            myAdapter.notifyDataSetChanged()
+
                         }
 
                         is Result.Failure -> {
