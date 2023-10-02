@@ -7,14 +7,14 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/SongName"
+        android:id="@+id/SongNameTextView"
         android:textSize="12pt"
         />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/SongDescription"
+        android:id="@+id/SongDescriptionTextView"
         android:textSize="10pt"
         />
 
