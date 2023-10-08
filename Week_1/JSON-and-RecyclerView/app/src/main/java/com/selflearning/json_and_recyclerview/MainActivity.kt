@@ -32,14 +32,14 @@ class MainActivity : AppCompatActivity() {
         val songListView = findViewById<RecyclerView>(R.id.webSongDataDisplay)
         songListView.layoutManager = LinearLayoutManager(this)
 
-        var songsList = listOf<Song>()
+        var songsList : List<Song>
         /*
         When a lambda function is the last parameter for an object, it is recommended
         to move it outside of the parentheses. This is done so that your code looks
         much cleaner and easier to read.
         */
-        val myAdapter = MySongAdapter(songsList) {Toast.makeText(this, "${songsList[it].title}, ${songsList[it].artist}, ${songsList[it].year}", Toast.LENGTH_LONG).show()}
-        songListView.adapter = myAdapter
+        //val myAdapter = MySongAdapter(songsList) {Toast.makeText(this, "${songsList[it].title}, ${songsList[it].artist}, ${songsList[it].year}", Toast.LENGTH_LONG).show()}
+        //songListView.adapter = myAdapter
 
         val nameEntry = findViewById<EditText>(R.id.songArtistSearchName)
         val songSearchBtn = findViewById<Button>(R.id.searchSongArtistBtn)
@@ -65,9 +65,12 @@ class MainActivity : AppCompatActivity() {
                         is Result.Success -> {
                             // Parsing not done right now, we'll just be displaying raw data
                             //resultView.text = result.get().decodeToString()
+                            songsList = result.get()
+                            val myAdapter = MySongAdapter(songsList) {Toast.makeText(this, "${songsList[it].title}, ${songsList[it].artist}, ${songsList[it].year}", Toast.LENGTH_LONG).show()}
+                            songListView.adapter = myAdapter
 
                             // Setting the variable 'songs' to the list obtained from the web search
-                            myAdapter.songs = result.get()
+                            myAdapter.songs = songsList
 
                             // We also need to tell the adapter to update itself with new data
                             // when you perform a new song search so that the RecyclerView gets redrawn
