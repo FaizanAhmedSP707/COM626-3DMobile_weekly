@@ -1,0 +1,15 @@
+Author: Faizan Ahmed
+Course Level: 3
+Module Name: Mobile Development and 3D Graphics
+Module Code: COM626
+Teaching Week: 3
+
+Message:
+
+	This is to notify the owner that the folder called 'ServicesStarter', which contains the answer to the first
+	question, actually contains another Git repository that was forked over from the tutor's repository, hence
+	this second internal repository cannot be pushed to the larger container repository. If the contents of this
+	internal repository need to modified or viewed, pull up another GitBash instance inside the aforementioned
+	folder.
+
+-- End of message --
