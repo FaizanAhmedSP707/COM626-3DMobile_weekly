@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MappingWithBroadcasts</string>
+    <string name="go">Go!</string>
+    <string name="startGps">Start GPS</string>
+    <string name="getGps">Get GPS</string>
+    <string name="stopGps">Stop GPS</string>
 </resources>
