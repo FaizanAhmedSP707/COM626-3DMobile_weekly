@@ -25,6 +25,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Declaring the service that our application will use. -->
+        <service android:name=".MyGPSService"></service>
+
     </application>
 
 </manifest>
