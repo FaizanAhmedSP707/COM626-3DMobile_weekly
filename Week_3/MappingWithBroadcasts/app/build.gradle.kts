@@ -5,11 +5,11 @@ plugins {
 
 android {
     namespace = "com.unilearning.mappingwithbroadcasts"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.unilearning.mappingwithbroadcasts"
-        minSdk = 24
+        minSdk = 23
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
