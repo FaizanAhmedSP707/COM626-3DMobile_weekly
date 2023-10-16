@@ -139,6 +139,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        unbindService(serviceConn)
+        //unbindService(serviceConn)
+        unregisterReceiver(receiver)
     }
 }
