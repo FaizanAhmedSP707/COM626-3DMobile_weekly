@@ -1,9 +1,11 @@
 package com.unilearning.mappingwithbroadcasts
 
 import android.Manifest
+import android.content.BroadcastReceiver
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.ServiceConnection
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
@@ -36,6 +38,8 @@ class MainActivity : AppCompatActivity() {
         override fun onServiceDisconnected(name: ComponentName?) {
         }
     }
+    lateinit var receiver: BroadcastReceiver
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -46,6 +50,19 @@ class MainActivity : AppCompatActivity() {
         map1.controller?.setZoom(14.0)
         map1.controller?.setCenter(GeoPoint(51.05, -0.72))
         requestPermissions()
+
+        receiver = object: BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                when (intent?.action) {
+                    "sendLocationCoords" ->
+                }
+            }
+        }
+
+        val filter = IntentFilter().apply {
+            addAction("sendLocationCoords")
+        }
+        registerReceiver(receiver, filter)
 
         // Button handling for the buttons: This one is to start the GPS
         findViewById<Button>(R.id.btnStartGps).setOnClickListener {
