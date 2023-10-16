@@ -72,7 +72,13 @@ class MainActivity : AppCompatActivity() {
 
         // Button handling for the buttons: This one is to start the GPS
         findViewById<Button>(R.id.btnStartGps).setOnClickListener {
-            service?.startGps()
+            //service?.startGps()
+
+            // Here we send an intent instead for the service to receive and start the GPS service
+            val gpsStartBroadcast = Intent().apply {
+                action = "StartSignal"
+            }
+            sendBroadcast(gpsStartBroadcast)
         }
 
         // This one is to query the service for location updates and update our ViewModel with the new data
@@ -84,7 +90,13 @@ class MainActivity : AppCompatActivity() {
 
         // This one is for stopping the service
         findViewById<Button>(R.id.btnStopGps).setOnClickListener {
-            service?.stopGps()
+            //service?.stopGps()
+
+            // Here we send a different intent to the service to stop the GPS
+            val gpsStopBroadcast = Intent().apply {
+                action = "StopSignal"
+            }
+            sendBroadcast(gpsStopBroadcast)
         }
 
         // Applying the observer to the LiveData present in our ViewModel so that the map can be updated
