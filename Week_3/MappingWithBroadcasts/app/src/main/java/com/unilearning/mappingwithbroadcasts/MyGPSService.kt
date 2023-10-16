@@ -9,9 +9,11 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.os.IBinder
 import android.widget.Toast
+import android.content.BroadcastReceiver // For part b of the 2nd question
+import android.content.IntentFilter // For part b of the 2nd question
 
 class MyGPSService: Service(), LocationListener {
-
+    lateinit var receiver: BroadcastReceiver
     var mgr: LocationManager? = null
 
     // Need this for storing the new location when the user's location changes
@@ -24,8 +26,27 @@ class MyGPSService: Service(), LocationListener {
     // Start handler
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         checkPermission = true
+
+        val receiverFilter = IntentFilter().apply {
+            addAction("StartSignal")
+            addAction("StopSignal")
+        }
+        receiver = object: BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                when (intent?.action) {
+                    "StartSignal" -> {
+                        startGps()
+                    }
+                    "StopSignal" -> {
+                        stopGps()
+                    }
+                }
+            }
+        }
+        registerReceiver(receiver, receiverFilter)
+
         // Do something here, e.g. start GPS, or music playing, etc.
-        startGps()
+        //startGps()
 
         return START_STICKY // --> Important if you want the service to be restarted
     }
