@@ -55,6 +55,14 @@ class MyGPSService: Service(), LocationListener {
     override fun onLocationChanged(newLoc: Location) {
         latLon.lat = newLoc.latitude
         latLon.lon = newLoc.longitude
+
+        // Send the above data in a broadcast instead
+        val broadcast = Intent().apply {
+            action = "sendLocationCoords"
+            putExtra("com.unilearning.mappingwithbroadcasts.latitude", newLoc.latitude)
+            putExtra("com.unilearning.mappingwithbroadcasts.longitude", newLoc.longitude)
+        }
+        sendBroadcast(broadcast)
     }
 
     override fun onProviderDisabled(provider: String) {
