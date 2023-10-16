@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
 
     val gpsViewModel: LocationViewModel by viewModels()
 
+    /*  This code isn't needed here for this exercise as we're using broadcasts
     // Add your service as an attribute of the main activity (nullable)
     val serviceConn = object: ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, binder: IBinder?) {
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         override fun onServiceDisconnected(name: ComponentName?) {
         }
     }
+    */
     lateinit var receiver: BroadcastReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,17 +53,21 @@ class MainActivity : AppCompatActivity() {
         map1.controller?.setCenter(GeoPoint(51.05, -0.72))
         requestPermissions()
 
+        val filter = IntentFilter().apply {
+            addAction("sendLocationCoords")
+        }
         receiver = object: BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
                 when (intent?.action) {
-                    "sendLocationCoords" ->
+                    "sendLocationCoords" -> {
+                        val newLatitude = intent.getDoubleExtra("com.unilearning.mappingwithbroadcasts.latitude", 0.0)
+                        val newLongitude = intent.getDoubleExtra("com.unilearning.mappingwithbroadcasts.longitude", 0.0)
+                        gpsViewModel.latlon = LatLon(newLatitude, newLongitude)
+                    }
                 }
             }
         }
 
-        val filter = IntentFilter().apply {
-            addAction("sendLocationCoords")
-        }
         registerReceiver(receiver, filter)
 
         // Button handling for the buttons: This one is to start the GPS
