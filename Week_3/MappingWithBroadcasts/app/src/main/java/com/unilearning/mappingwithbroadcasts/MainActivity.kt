@@ -68,7 +68,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        registerReceiver(receiver, filter)
+        //registerReceiver(receiver, filter)
+        ContextCompat.registerReceiver(this, receiver, filter, ContextCompat.RECEIVER_NOT_EXPORTED)
+        // The above code is a much more secure way of registering broadcasts for the app!
 
         // Button handling for the buttons: This one is to start the GPS
         findViewById<Button>(R.id.btnStartGps).setOnClickListener {
