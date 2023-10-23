@@ -25,6 +25,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <!-- This new intent filter is for this app to respond to an implicit intent sent from another activity -->
+            <intent-filter>
+                <action android:name="ACTION_DISPLAY_MAP"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
         </activity>
 
         <!-- Declaring the service that our application will use. -->
