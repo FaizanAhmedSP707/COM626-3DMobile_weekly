@@ -1,6 +1,9 @@
 package com.unilearning.notificationsapp
 
 import android.Manifest
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.BroadcastReceiver
 import android.content.ComponentName
 import android.content.Context
@@ -8,6 +11,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.ServiceConnection
 import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.IBinder
@@ -23,7 +27,7 @@ import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 
 class MainActivity : AppCompatActivity() {
-
+    var notifyID = 0
     var permissionsGranted = false
     var service: MyGPSService? = null
 
@@ -63,6 +67,28 @@ class MainActivity : AppCompatActivity() {
                         val newLatitude = intent.getDoubleExtra("com.unilearning.mappingwithbroadcasts.latitude", 0.0)
                         val newLongitude = intent.getDoubleExtra("com.unilearning.mappingwithbroadcasts.longitude", 0.0)
                         gpsViewModel.latlon = LatLon(newLatitude, newLongitude)
+
+                        // Creating a channel ID for this notification as we're targeting API Level 26+
+                        val channelID = "LOCATION_CHANNEL"
+
+                        // Guarding the code for channels by checking if we're running at least Oreo (API Level26)
+                        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            val channel = NotificationChannel(channelID, "Location notifications", NotificationManager.IMPORTANCE_DEFAULT)
+                            val nMgr = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                            nMgr.createNotificationChannel(channel)
+
+                            // Creating a notification for the new latlon received from the broadcast
+                            val notification = Notification.Builder(this@MainActivity, channelID)
+                                .setContentTitle("Location changed")
+                                .setContentText("New latitude: ${newLatitude}, New Longitude: $newLongitude")
+                                .setSmallIcon(R.drawable.note)
+                                .build()
+
+                            // To actually show the notification we need the notification manager
+                            nMgr.notify(notifyID, notification)
+                            // Increment the local class variable to make assigning IDs easier
+                            notifyID++
+                        }
                     }
                 }
             }
