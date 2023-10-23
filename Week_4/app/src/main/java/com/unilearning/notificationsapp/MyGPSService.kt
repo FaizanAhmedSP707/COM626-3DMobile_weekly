@@ -63,7 +63,7 @@ class MyGPSService: Service(), LocationListener {
     fun startGps() {
         mgr = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         if(checkPermission == true) {
-            mgr?.requestLocationUpdates(LocationManager.GPS_PROVIDER,5000,0f, this)
+            mgr?.requestLocationUpdates(LocationManager.GPS_PROVIDER,5000,5f, this)
         }
 
     }
