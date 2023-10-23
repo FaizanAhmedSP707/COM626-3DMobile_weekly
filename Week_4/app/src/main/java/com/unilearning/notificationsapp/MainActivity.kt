@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.ComponentName
 import android.content.Context
@@ -68,6 +69,15 @@ class MainActivity : AppCompatActivity() {
                         val newLongitude = intent.getDoubleExtra("com.unilearning.mappingwithbroadcasts.longitude", 0.0)
                         gpsViewModel.latlon = LatLon(newLatitude, newLongitude)
 
+                        /*
+                        Have a broadcast intent declared here which will send an intent to stop the GPS when the button on the
+                        notification is tapped on.
+                        */
+                        val broadcast_stopGPS = Intent().apply {
+                            action = "StopSignal"
+                        }
+                        val piStopGpsUpdates = PendingIntent.getBroadcast(this@MainActivity, notifyID, broadcast_stopGPS, PendingIntent.FLAG_UPDATE_CURRENT)
+
                         // Creating a channel ID for this notification as we're targeting API Level 26+
                         val channelID = "LOCATION_CHANNEL"
 
@@ -82,6 +92,7 @@ class MainActivity : AppCompatActivity() {
                                 .setContentTitle("Location changed")
                                 .setContentText("New latitude: ${newLatitude}, New Longitude: $newLongitude")
                                 .setSmallIcon(R.drawable.note)
+                                .addAction(Notification.Action.Builder(R.drawable.node, "Stop GPS", piStopGpsUpdates).build()) // For adding the button to the notification which will launch our pending intent
                                 .build()
 
                             // To actually show the notification we need the notification manager
