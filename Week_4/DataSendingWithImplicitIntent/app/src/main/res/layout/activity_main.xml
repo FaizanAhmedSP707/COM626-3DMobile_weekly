@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LatDisplayTxt"
+        android:text="@string/userlatitudeEntryDisplayText"
+        android:textSize="13pt"
+        app:layout_constraintBottom_toTopOf="@id/userLatitudeEntry"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/userLatitudeEntry"
+        android:inputType="numberDecimal"
+        android:hint="@string/userlatEntryHint"
+        app:layout_constraintTop_toBottomOf="@id/LatDisplayTxt"
+        app:layout_constraintBottom_toTopOf="@id/LonDisplayTxt"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LonDisplayTxt"
+        android:text="@string/userlongitudeEntryDisplayText"
+        android:textSize="13pt"
+        app:layout_constraintTop_toBottomOf="@id/userLatitudeEntry"
+        app:layout_constraintBottom_toTopOf="@id/userLongitudeEntry"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/userLongitudeEntry"
+        android:inputType="numberDecimal"
+        android:hint="@string/userlonEntryHint"
+        app:layout_constraintTop_toBottomOf="@id/LonDisplayTxt"
+        app:layout_constraintBottom_toTopOf="@id/spinnerForMapStyleSelection"
+        />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerForMapStyleSelection"
+        android:entries="@array/mapStyleSelect"
+        app:layout_constraintTop_toBottomOf="@id/userLongitudeEntry"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

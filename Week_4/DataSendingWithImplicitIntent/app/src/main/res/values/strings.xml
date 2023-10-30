@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ForwardImplicitApp</string>
+    <string name="userlatitudeEntryDisplayText">Your chosen Latitude:</string>
+    <string name="userlongitudeEntryDisplayText">Your chosen Longitude:</string>
+    <string name="userlatEntryHint">Enter a decimal number (can be a negative value)</string>
+    <string name="userlonEntryHint">Enter a decimal number (can be a negative value)</string>
+    <array name="mapStyleSelect">
+        <item>OpenTopo</item>
+        <item>MAPNIK</item>
+    </array>
+</resources>
