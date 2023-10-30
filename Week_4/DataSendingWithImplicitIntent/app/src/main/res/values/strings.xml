@@ -8,4 +8,5 @@
         <item>OpenTopo</item>
         <item>MAPNIK</item>
     </array>
+    <string name="sendBtnText">Send Data</string>
 </resources>
