@@ -15,7 +15,10 @@
         app:layout_constraintBottom_toTopOf="@id/userLatitudeEntry"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
 
     <EditText
         android:layout_width="match_parent"
@@ -25,6 +28,8 @@
         android:hint="@string/userlatEntryHint"
         app:layout_constraintTop_toBottomOf="@id/LatDisplayTxt"
         app:layout_constraintBottom_toTopOf="@id/LonDisplayTxt"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         />
 
     <TextView
@@ -35,6 +40,8 @@
         android:textSize="13pt"
         app:layout_constraintTop_toBottomOf="@id/userLatitudeEntry"
         app:layout_constraintBottom_toTopOf="@id/userLongitudeEntry"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         />
 
     <EditText
@@ -45,6 +52,8 @@
         android:hint="@string/userlonEntryHint"
         app:layout_constraintTop_toBottomOf="@id/LonDisplayTxt"
         app:layout_constraintBottom_toTopOf="@id/spinnerForMapStyleSelection"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         />
 
     <Spinner
@@ -53,6 +62,8 @@
         android:id="@+id/spinnerForMapStyleSelection"
         android:entries="@array/mapStyleSelect"
         app:layout_constraintTop_toBottomOf="@id/userLongitudeEntry"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         />
 
     <Button
