@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.unilearning.forwardimplicitapp"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.unilearning.forwardimplicitapp"
