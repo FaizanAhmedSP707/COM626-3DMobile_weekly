@@ -24,6 +24,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import org.osmdroid.config.Configuration
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 
@@ -101,6 +102,24 @@ class MainActivity : AppCompatActivity() {
                             notifyID++
                         }
                     }
+                }
+            }
+        }
+
+        // Code to retrieve the data stored within the implicit intent when another activity sends it to this activity
+        if(intent?.action == "ACTION_DISPLAY_MAP"){
+            // Obtain the data from the intent
+            intent.apply {
+                val userLatCoordinate = this.getDoubleExtra("com.unilearning.forwardimplicitapp.LAT", 0.0)
+                val userLonCoordinate = this.getDoubleExtra("com.unilearning.forwardimplicitapp.LON", 0.0)
+                val mapStyle = this.getStringExtra("com.unilearning.forwardimplicitapp.MAPSPIN")
+
+                // Set the coordinates and the map style for the map using the received data
+                map1.controller?.setCenter(GeoPoint(userLatCoordinate, userLonCoordinate))
+                if(mapStyle.equals("opentopomap")){
+                    map1.setTileSource(TileSourceFactory.OpenTopo)
+                } else {
+                    map1.setTileSource(TileSourceFactory.MAPNIK)
                 }
             }
         }
