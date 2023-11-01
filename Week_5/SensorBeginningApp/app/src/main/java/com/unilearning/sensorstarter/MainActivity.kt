@@ -11,7 +11,7 @@ import android.widget.TextView
 
 class MainActivity : AppCompatActivity(), SensorEventListener {
 
-    lateinit var accel: Sensor
+    var accel: Sensor? = null
 
     // An array to hold the current acceleration and magnetic field sensor values
     var accelValues = FloatArray(3)
@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         setContentView(R.layout.activity_main)
 
         val sensorMgr = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        accel = sensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) //Why is this always showing up as red???
+        accel = sensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
         sensorMgr.registerListener(this, accel, SensorManager.SENSOR_DELAY_UI)
     }
 
@@ -29,9 +29,9 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         // Leave blank, normally we don't do much here unless we have to do something
     }
 
-    override fun onSensorChanged(ev: SensorEvent?) {
+    override fun onSensorChanged(ev: SensorEvent) {
         // Testing which sensor has been detected and then doing something with it
-        if(ev?.sensor == accel) {
+        if(ev.sensor == accel) {
             // handle the accelerometer sensor
             accelValues = ev.values.copyOf()
             val tvX = findViewById<TextView>(R.id.xAxisAccelValue)
