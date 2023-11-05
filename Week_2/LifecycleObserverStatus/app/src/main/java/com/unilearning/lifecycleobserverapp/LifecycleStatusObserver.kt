@@ -13,6 +13,11 @@ class LifecycleStatusObserver(val lifeViewModel: LifecycleViewModel): DefaultLif
         lifeViewModel.addStatusMessage("Started")
     }
 
+    override fun onStart(owner: LifecycleOwner) {
+        // Before onResume is called and after onCreate is executed
+        lifeViewModel.addStatusMessage("Started")
+    }
+
     override fun onPause(owner: LifecycleOwner) {
         // When the activity is paused
         message = false
@@ -23,6 +28,11 @@ class LifecycleStatusObserver(val lifeViewModel: LifecycleViewModel): DefaultLif
         // When the activity is resumed again after another activity or app was closed when this app was running
         message = false
         lifeViewModel.addStatusMessage("Resumed")
+    }
+
+    override fun onStop(owner: LifecycleOwner) {
+        // Before onDestroy is called
+        lifeViewModel.addStatusMessage("Stopped")
     }
 
     override fun onDestroy(owner: LifecycleOwner) {
