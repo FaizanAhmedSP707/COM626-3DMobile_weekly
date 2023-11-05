@@ -15,6 +15,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // accessing our textview here first so that we can access it later
+        val tv = findViewById<TextView>(R.id.tvStateLister)
+        // adding the movement option prescribed to the text view by calling the appropriate function
+        tv.movementMethod = ScrollingMovementMethod()
+
         val observer = LifecycleStatusObserver(lifeViewModel)
         /*
         The lifecycle keyword here is an attribute of the main activity. We create our observer
@@ -32,8 +37,7 @@ class MainActivity : AppCompatActivity() {
         separator (\n).
         */
         lifeViewModel.statesLive.observe(this, Observer{
-            findViewById<TextView>(R.id.tvStateLister).movementMethod = ScrollingMovementMethod()
-            findViewById<TextView>(R.id.tvStateLister).text = it.joinToString("\n")
+            tv.text = it.joinToString("\n")
         })
     }
 }
