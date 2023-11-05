@@ -10,7 +10,7 @@ class LifecycleStatusObserver(val lifeViewModel: LifecycleViewModel): DefaultLif
     override fun onCreate(owner: LifecycleOwner) {
         // When the activity is first launched, this will run first
         message = true
-        lifeViewModel.addStatusMessage("Started")
+        lifeViewModel.addStatusMessage("Created")
     }
 
     override fun onStart(owner: LifecycleOwner) {
