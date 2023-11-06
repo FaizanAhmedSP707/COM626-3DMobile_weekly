@@ -22,3 +22,6 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# Folder to create library project for Week 7 activities, not necessary to be on Git
+./Week_7/OpenGL_WrapperLib/
