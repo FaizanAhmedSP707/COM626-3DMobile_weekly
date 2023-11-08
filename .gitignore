@@ -24,4 +24,4 @@ hs_err_pid*
 replay_pid*
 
 # Folder to create library project for Week 7 activities, not necessary to be on Git
-./Week_7/OpenGL_WrapperLib/
+Week_7/OpenGL_WrapperLib/
