@@ -1,0 +1,15 @@
+Author: Faizan Ahmed
+Course Level: 3
+Module Name: Mobile Development and 3D Graphics
+Module Code: COM626
+Teaching Week: 2
+
+Message: 
+
+	The purpose of this folder is to notify the user that the folder called  'LifecycleMapsStarter' is actually
+	a clone of the tutor's repository, hence changes cannot be pushed to it. If the folder receives new changes
+	by changing something code-related or some folders that are renamed, then the changes will only be visible
+	on the owner's local machine. It maybe best to create a fork of the tutor's repository, copy and paste the
+	changes from the folder mentioned above, and then see all the changes on GitHub.
+
+-- End of message --
