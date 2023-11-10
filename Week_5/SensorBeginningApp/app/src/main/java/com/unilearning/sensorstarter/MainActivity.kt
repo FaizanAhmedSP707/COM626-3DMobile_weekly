@@ -12,6 +12,7 @@ import android.widget.TextView
 class MainActivity : AppCompatActivity(), SensorEventListener {
 
     var accel: Sensor? = null
+    var magField: Sensor? = null
 
     // An array to hold the current acceleration and magnetic field sensor values
     var accelValues = FloatArray(3)
