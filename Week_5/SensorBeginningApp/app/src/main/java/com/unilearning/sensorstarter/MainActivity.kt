@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         magField = sensorMgr.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) // Getting the magnetic field sensor
         // The magnetic field sensor gives measurements in µT (micro Tesla; µ = 10^-6)
         sensorMgr.registerListener(this, accel, SensorManager.SENSOR_DELAY_UI)
+        sensorMgr.registerListener(this, magField, SensorManager.SENSOR_DELAY_UI)
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
