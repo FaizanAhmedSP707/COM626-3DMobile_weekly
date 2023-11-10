@@ -14,6 +14,17 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     var accel: Sensor? = null
     var magField: Sensor? = null
 
+    // The following three variables will be used in the 'smoothing' calculations.
+    var prevX: Float = 0.0f
+    var prevY: Float = 0.0f
+    var prevZ: Float = 0.0f
+
+    // The following three variables will be used to hold the 'smoothed-out' values from
+    // the accelerometer
+    var smoothX: Float = 0.0f
+    var smoothY: Float = 0.0f
+    var smoothZ: Float = 0.0f
+
     // An array to hold the current acceleration and magnetic field sensor values
     var accelValues = FloatArray(3)
     // Another array to hold the magnetic field values:
@@ -49,18 +60,37 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             *
             * Typically k is a small value, e.g. 0.05 or 0.075
             * */
-            var prevX = accelValues[0]
-            var prevY = accelValues[1]
-            var prevZ = accelValues[2]
 
-            var smoothX = prevX*0.05 + (prevX * (1-0.05))
-            var smoothY = prevY*0.05 + (prevY * (1-0.05))
-            var smoothZ = prevZ*0.05 + (prevZ * (1-0.05))
+            if(tvX.text.toString() == "" && tvY.text.toString() == "" && tvZ.text.toString() == ""){
+                /*
+                If all the three text views are empty, then get the values from the accel sensor,
+                convert them to string data, and store the current values so that they can be used
+                to smooth out the next values that are received from the accel sensor
+                */
+                tvX.text = accelValues[0].toString()
+                tvY.text = accelValues[1].toString()
+                tvZ.text = accelValues[2].toString()
 
-            // Setting the values of the float array to each of the 3 text views
-            tvX.text = smoothX.toString()
-            tvY.text = smoothY.toString()
-            tvZ.text = smoothZ.toString()
+                // Storage of the current values of x,y and z to smooth out the next values that are obtained
+                prevX = accelValues[0]
+                prevY = accelValues[1]
+                prevZ = accelValues[2]
+
+            } else {
+                // Use the previously stored values of x,y & z to display the new values
+                smoothX = (prevX*0.05 + (prevX * (1-0.05))).toFloat()
+                smoothY = (prevY*0.05 + (prevY * (1-0.05))).toFloat()
+                smoothZ = (prevZ*0.05 + (prevZ * (1-0.05))).toFloat()
+
+                tvX.text = smoothX.toString()
+                tvY.text = smoothY.toString()
+                tvZ.text = smoothZ.toString()
+
+                // Finally set the three current float values to the 'prev..' variables
+                prevX = accelValues[0]
+                prevY = accelValues[1]
+                prevZ = accelValues[2]
+            }
             // NOTE: The code above needs a bit of refactoring as it doesn't seem to work as expected
 
         } else if(ev.sensor == magField){
