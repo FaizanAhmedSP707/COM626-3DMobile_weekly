@@ -38,4 +38,35 @@
         app:layout_constraintRight_toRightOf="parent"
         />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/AzimuthTextView"
+        android:textSize="14pt"
+        app:layout_constraintTop_toBottomOf="@id/zAxisAccelValue"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/PitchTextView"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/PitchTextView"
+        android:textSize="14pt"
+        app:layout_constraintTop_toBottomOf="@id/AzimuthTextView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/RollTextView"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/RollTextView"
+        app:layout_constraintTop_toBottomOf="@id/RollTextView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
