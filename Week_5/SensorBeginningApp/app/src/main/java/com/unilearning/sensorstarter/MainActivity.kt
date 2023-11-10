@@ -62,6 +62,9 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             tvY.text = smoothY.toString()
             tvZ.text = smoothZ.toString()
             // NOTE: The code above needs a bit of refactoring as it doesn't seem to work as expected
+
+        } else if(ev.sensor == magField){
+            TODO("Hasn't been implemented yet, will do in the near future")
         }
     }
 }
