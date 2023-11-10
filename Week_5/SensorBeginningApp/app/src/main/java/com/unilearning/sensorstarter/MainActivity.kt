@@ -30,6 +30,13 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     // Another array to hold the magnetic field values:
     var magFieldValues = FloatArray(3)
 
+    val orientationMatrix = FloatArray(16) // Will be changed from it's original state to a different state eventually
+    var orientations = FloatArray(3)
+
+    val tvAzimuth = findViewById<TextView>(R.id.AzimuthTextView)
+    val tvPitch = findViewById<TextView>(R.id.PitchTextView)
+    val tvRoll = findViewById<TextView>(R.id.RollTextView)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -95,7 +102,21 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             // NOTE: The code above needs a bit of refactoring as it doesn't seem to work as expected
 
         } else if(ev.sensor == magField){
-            TODO("Hasn't been implemented yet, will do in the near future")
+            // handle the magnetic field sensor
+
+            // Copy the current values into the magnetic field value array
+            magFieldValues = ev.values.copyOf()
         }
+
+        // Calculate the rotation matrix
+        SensorManager.getRotationMatrix(orientationMatrix, null, magFieldValues, accelValues)
+
+        // Get the orientations
+        SensorManager.getOrientation(orientationMatrix, orientations)
+
+        // Display the orientations in the 3 other text views
+        tvAzimuth.text = orientations[0].toString()
+        tvPitch.text = orientations[1].toString()
+        tvRoll.text = orientations[2].toString()
     }
 }
