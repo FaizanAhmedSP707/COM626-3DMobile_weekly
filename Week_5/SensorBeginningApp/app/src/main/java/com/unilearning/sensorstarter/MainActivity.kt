@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         val sensorMgr = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         accel = sensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        magField = sensorMgr.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) // Getting the magnetic field sensor
+        // The magnetic field sensor gives measurements in µT (micro Tesla; µ = 10^-6)
         sensorMgr.registerListener(this, accel, SensorManager.SENSOR_DELAY_UI)
     }
 
