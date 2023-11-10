@@ -16,6 +16,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     // An array to hold the current acceleration and magnetic field sensor values
     var accelValues = FloatArray(3)
+    // Another array to hold the magnetic field values:
+    var magFieldValues = FloatArray(3)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
