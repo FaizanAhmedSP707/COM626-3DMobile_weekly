@@ -82,6 +82,12 @@ class OpenGLView(ctx: Context): GLSurfaceView(ctx), GLSurfaceView.Renderer {
         // getting a handle on the uniform variable for our shape, which is colour in this case
         val ref_uColour = gpu.getUniformLocation("uColour")
 
+        val refUView = gpu.getAttribLocation("uView")
+        val refUProj = gpu.getAttribLocation("uProj")
+
+        gpu.sendMatrix(refUView, viewMatrix)
+        gpu.sendMatrix(refUProj, projectionMatrix)
+
         // Run the below code only if the buffer is not null
         fbuf?.apply {
 
@@ -118,5 +124,10 @@ class OpenGLView(ctx: Context): GLSurfaceView(ctx), GLSurfaceView.Renderer {
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
         // Setting up the view port
         GLES20.glViewport(0, 0, width, height)
+
+        // Calculating the projection matrix each time the dimensions of the 'GLSurfaceView' change
+        val hfov = 60.0f // Horizontal field of view
+        val aspect : Float = width.toFloat() / height
+        projectionMatrix.setProjectionMatrix(hfov, aspect, 0.001f, 100f)
     }
 }
