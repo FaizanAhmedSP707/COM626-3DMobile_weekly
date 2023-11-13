@@ -25,6 +25,8 @@ class OpenGLView(ctx: Context): GLSurfaceView(ctx), GLSurfaceView.Renderer {
 
     var fbuf: FloatBuffer? = null
 
+    val red = floatArrayOf(1.0f, 0.0f, 0.0f, 1.0f)
+
     // Setup code to run when the OpenGL view is first created
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
         // Sets the background colour
@@ -48,6 +50,8 @@ class OpenGLView(ctx: Context): GLSurfaceView(ctx), GLSurfaceView.Renderer {
                     0f, 1f, 0f
                 )
             )
+            // Selects this shader program
+            gpu.select()
         } catch(e: IOException) {
             // This code involves loading files, so we need to handle the appropriate exception
             Log.d("opengl01Load", e.stackTraceToString())
@@ -62,6 +66,37 @@ class OpenGLView(ctx: Context): GLSurfaceView(ctx), GLSurfaceView.Renderer {
     override fun onDrawFrame(gl: GL10?) {
         // Clears any previous settings from the previous frame
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
+
+        // Create a reference to the attribute variable aVertex
+        val ref_aVertex = gpu.getAttribLocation("aVertex")
+
+        // getting a handle on the uniform variable for our shape, which is colour in this case
+        val ref_uColour = gpu.getUniformLocation("uColour")
+
+        // Run the below code only if the buffer is not null
+        fbuf?.apply {
+
+            // Sending data to the shader
+            gpu.setUniform4FloatArray(ref_uColour, red)
+
+            // Telling Android OpenGL ES 2.0 what format our data is in, and what shader variable will
+            // receive the data
+            gpu.specifyBufferedDataFormat(ref_aVertex, this, 0)
+
+            // For the stride value, either 0 or 12 will work. Stride refers to the number
+            // of bytes separating one vertex's data from the other
+
+            /*
+            * Finally, we draw the triangle. This works by passing each vertex in the selected buffer to
+            * the shader in turn, loading each vertex into the currently-selected shader variable.
+            *
+            * This example can be modified to draw 6 triangles by setting firstVertex to 0 and the
+            * nVertices to 6. The method will know to treat each set of three vertices as a triangle.
+            * Alternatively, if our float array of vertices had 6 vertices specified, we could choose
+            * to draw only the second triangle by providing 3,3 to the gpu call below.
+            * */
+            gpu.drawBufferedTriangles(0, 3)
+        }
     }
     /*
     Is called whenever the resolution changes
