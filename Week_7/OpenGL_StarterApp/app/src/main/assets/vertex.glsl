@@ -1,5 +1,5 @@
 attribute vec4 aVertex;
 
 void main(void) {
-    gl_Position = aVertext;
+    gl_Position = aVertex;
 }
