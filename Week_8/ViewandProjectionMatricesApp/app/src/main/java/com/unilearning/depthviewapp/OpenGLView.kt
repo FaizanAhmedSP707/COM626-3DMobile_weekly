@@ -52,12 +52,12 @@ class OpenGLView(ctx: Context, aSet: AttributeSet): GLSurfaceView(ctx, aSet), GL
             // in order to make a flat shape appear on the screen.
             fbuf = OpenGLUtils.makeFloatBuffer(
                 floatArrayOf(
-                    0f, 0f, 0f,
-                    1f, 0f, 0f,
-                    0f, 1f, 0f,
-                    0f, 0f, 0f,
-                    -1f, 0f, 0f,
-                    0f, -1f, 0f
+                    0f, 0f, -3f,
+                    1f, 0f, -3f,
+                    0.5f, 1f, -3f,
+                    -0.5f, 0f, -6f,
+                    0.5f, 0f, -6f,
+                    0f, 1f, -6f
                 )
             )
             // Selects this shader program
@@ -76,6 +76,9 @@ class OpenGLView(ctx: Context, aSet: AttributeSet): GLSurfaceView(ctx, aSet), GL
     override fun onDrawFrame(gl: GL10?) {
         // Clears any previous settings from the previous frame
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
+
+        // setting the view matrix to the identity matrix so that it has no effect initially.
+        viewMatrix.setAsIdentityMatrix()
 
         // Create a reference to the attribute variable aVertex
         val ref_aVertex = gpu.getAttribLocation("aVertex")
