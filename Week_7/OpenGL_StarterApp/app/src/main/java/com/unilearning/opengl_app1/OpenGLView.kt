@@ -25,7 +25,8 @@ class OpenGLView(ctx: Context): GLSurfaceView(ctx), GLSurfaceView.Renderer {
 
     var fbuf: FloatBuffer? = null
 
-    val red = floatArrayOf(1.0f, 0.0f, 0.0f, 1.0f)
+    val blueCol = floatArrayOf(0.0f, 0.0f, 1.0f, 1.0f) // Global constant for drawing an opaque blue shape
+    val yellowCol = floatArrayOf(1.0f, 1.0f, 0.0f, 1.0f) // Global constant for drawing an opaque yellow shape
 
     // Setup code to run when the OpenGL view is first created
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
@@ -80,7 +81,7 @@ class OpenGLView(ctx: Context): GLSurfaceView(ctx), GLSurfaceView.Renderer {
         fbuf?.apply {
 
             // Sending data to the shader
-            gpu.setUniform4FloatArray(ref_uColour, red)
+            gpu.setUniform4FloatArray(ref_uColour, blueCol)
 
             // Telling Android OpenGL ES 2.0 what format our data is in, and what shader variable will
             // receive the data
@@ -98,7 +99,11 @@ class OpenGLView(ctx: Context): GLSurfaceView(ctx), GLSurfaceView.Renderer {
             * Alternatively, if our float array of vertices had 6 vertices specified, we could choose
             * to draw only the second triangle by providing 3,3 to the gpu call below.
             * */
-            gpu.drawBufferedTriangles(0, 6)
+            gpu.drawBufferedTriangles(0, 3) // The first triangle is to be done in blue
+
+            // Now the second triangle is to be drawn in yellow
+            gpu.setUniform4FloatArray(ref_uColour, yellowCol)
+            gpu.drawBufferedTriangles(3, 3)
         }
     }
     /*
