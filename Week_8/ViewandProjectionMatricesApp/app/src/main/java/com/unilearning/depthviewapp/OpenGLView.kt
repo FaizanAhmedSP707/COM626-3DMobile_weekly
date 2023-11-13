@@ -3,6 +3,7 @@ import android.content.Context
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
 import android.util.Log
+import freemap.openglwrapper.GLMatrix
 import freemap.openglwrapper.GPUInterface
 import freemap.openglwrapper.OpenGLUtils
 import java.io.IOException
@@ -25,6 +26,12 @@ class OpenGLView(ctx: Context): GLSurfaceView(ctx), GLSurfaceView.Renderer {
 
     val blueCol = floatArrayOf(0.0f, 0.0f, 1.0f, 1.0f) // Global constant for drawing an opaque blue shape
     val yellowCol = floatArrayOf(1.0f, 1.0f, 0.0f, 1.0f) // Global constant for drawing an opaque yellow shape
+
+    // Create a variable to hold the view matrix
+    val viewMatrix = GLMatrix()
+
+    // Create a variable to hold the projection matrix
+    val projectionMatrix = GLMatrix()
 
     // Setup code to run when the OpenGL view is first created
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
