@@ -47,7 +47,10 @@ class OpenGLView(ctx: Context): GLSurfaceView(ctx), GLSurfaceView.Renderer {
                 floatArrayOf(
                     0f, 0f, 0f,
                     1f, 0f, 0f,
-                    0f, 1f, 0f
+                    0f, 1f, 0f,
+                    0f, 0f, 0f,
+                    -1f, 0f, 0f,
+                    0f, -1f, 0f
                 )
             )
             // Selects this shader program
@@ -95,7 +98,7 @@ class OpenGLView(ctx: Context): GLSurfaceView(ctx), GLSurfaceView.Renderer {
             * Alternatively, if our float array of vertices had 6 vertices specified, we could choose
             * to draw only the second triangle by providing 3,3 to the gpu call below.
             * */
-            gpu.drawBufferedTriangles(0, 3)
+            gpu.drawBufferedTriangles(0, 6)
         }
     }
     /*
