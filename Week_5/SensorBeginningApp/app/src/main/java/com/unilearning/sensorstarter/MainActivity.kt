@@ -33,9 +33,12 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     val orientationMatrix = FloatArray(16) // Will be changed from it's original state to a different state eventually
     var orientations = FloatArray(3)
 
-    val tvAzimuth = findViewById<TextView>(R.id.AzimuthTextView)
-    val tvPitch = findViewById<TextView>(R.id.PitchTextView)
-    val tvRoll = findViewById<TextView>(R.id.RollTextView)
+    //val tvAzimuth = findViewById<TextView>(R.id.AzimuthTextView)
+    //val tvPitch = findViewById<TextView>(R.id.PitchTextView)
+    //val tvRoll = findViewById<TextView>(R.id.RollTextView)
+    var tvAzimuth: TextView? = null
+    var tvPitch: TextView? = null
+    var tvRoll: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -115,8 +118,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         SensorManager.getOrientation(orientationMatrix, orientations)
 
         // Display the orientations in the 3 other text views
-        tvAzimuth.text = orientations[0].toString()
-        tvPitch.text = orientations[1].toString()
-        tvRoll.text = orientations[2].toString()
+        tvAzimuth = findViewById(R.id.AzimuthTextView)
+        tvPitch = findViewById(R.id.PitchTextView)
+        tvRoll = findViewById(R.id.RollTextView)
+        tvAzimuth?.text = orientations[0].toString()
+        tvPitch?.text = orientations[1].toString()
+        tvRoll?.text = orientations[2].toString()
     }
 }
