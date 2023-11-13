@@ -1,0 +1,54 @@
+*********************************************************************
+| Magnetic compass bearings and the directions associated with them |
+*********************************************************************
+
+/*
+ * The four main cardinal directions are North, South, East and West,
+ * which are represented by the letters N, S, E & W. These are then
+ * supplemented by the four 'Primary Inter Cardinal points', which 
+ * cover the directions in-between the four directions.
+ *
+ * They are named North East, South East, South West & North West,
+ * which are represented are by the letters NE, SE, SW & NW.
+ */
+
+North (N)          --> 000 (or 0 degrees)
+North-East (NE)    --> 045 (or 45 degrees)
+East (E)           --> 090 (or 90 degrees)
+South-East (SE)    --> 135 degrees
+South (S)          --> 180 degrees
+South-West (SW)    --> 225 degrees
+West (W)           --> 270 degrees
+North-West (NW)    --> 315 degrees
+
+------------------------------------------------------------------------
+
+/*
+ * Further to the 'Primary Inter Cardinal points', are the eight
+ * 'Secondary Inter Cardinal points', which cuts the circle on the 
+ * compass into 16 equal sections.
+ *
+ * They are named:
+ * 	North North West,
+ *	East North East,
+ * 	East South East,
+ * 	South South East,
+ * 	South South West,
+ * 	West South West,
+ * 	West North West and
+ *	North North West.
+ *
+ * These are represented by the letters
+ * NNW, ENE, ESE, SSE, SSW, WSW, WNW, NW
+ * 
+ * The directions of these are thus given below.
+ */
+
+NNE --> 022.5 degrees
+ENE --> 067.5 degrees
+ESE --> 112.5 degrees
+SSE --> 157.5 degrees
+SSW --> 202.5 degrees
+WSW --> 247.5 degrees
+WNW --> 292.5 degrees
+NNW --> 337.5 degrees
