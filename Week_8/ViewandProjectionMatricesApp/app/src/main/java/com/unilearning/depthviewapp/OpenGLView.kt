@@ -77,23 +77,23 @@ class OpenGLView(ctx: Context, aSet: AttributeSet): GLSurfaceView(ctx, aSet), GL
         // Clears any previous settings from the previous frame
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
-        // setting the view matrix to the identity matrix so that it has no effect initially.
-        viewMatrix.setAsIdentityMatrix()
-
-        // Create a reference to the attribute variable aVertex
-        val ref_aVertex = gpu.getAttribLocation("aVertex")
-
-        // getting a handle on the uniform variable for our shape, which is colour in this case
-        val ref_uColour = gpu.getUniformLocation("uColour")
-
-        val refUView = gpu.getUniformLocation("uView")
-        val refUProj = gpu.getUniformLocation("uProj")
-
-        gpu.sendMatrix(refUView, viewMatrix)
-        gpu.sendMatrix(refUProj, projectionMatrix)
-
         // Run the below code only if the buffer is not null
         fbuf?.apply {
+
+            // setting the view matrix to the identity matrix so that it has no effect initially.
+            viewMatrix.setAsIdentityMatrix()
+
+            // Create a reference to the attribute variable aVertex
+            val ref_aVertex = gpu.getAttribLocation("aVertex")
+
+            // getting a handle on the uniform variable for our shape, which is colour in this case
+            val ref_uColour = gpu.getUniformLocation("uColour")
+
+            val refUView = gpu.getUniformLocation("uView")
+            val refUProj = gpu.getUniformLocation("uProj")
+
+            gpu.sendMatrix(refUView, viewMatrix)
+            gpu.sendMatrix(refUProj, projectionMatrix)
 
             // Sending data to the shader
             gpu.setUniform4FloatArray(ref_uColour, blueCol)
