@@ -86,8 +86,8 @@ class OpenGLView(ctx: Context, aSet: AttributeSet): GLSurfaceView(ctx, aSet), GL
         // getting a handle on the uniform variable for our shape, which is colour in this case
         val ref_uColour = gpu.getUniformLocation("uColour")
 
-        val refUView = gpu.getAttribLocation("uView")
-        val refUProj = gpu.getAttribLocation("uProj")
+        val refUView = gpu.getUniformLocation("uView")
+        val refUProj = gpu.getUniformLocation("uProj")
 
         gpu.sendMatrix(refUView, viewMatrix)
         gpu.sendMatrix(refUProj, projectionMatrix)
