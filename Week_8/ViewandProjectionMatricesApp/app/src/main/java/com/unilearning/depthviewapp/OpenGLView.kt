@@ -114,6 +114,7 @@ class OpenGLView(ctx: Context, aSet: AttributeSet): GLSurfaceView(ctx, aSet), GL
             * Alternatively, if our float array of vertices had 6 vertices specified, we could choose
             * to draw only the second triangle by providing 3,3 to the gpu call below.
             * */
+            viewMatrix.translate(2f, 2f, 2f)
             gpu.drawBufferedTriangles(0, 3) // The first triangle is to be done in blue
 
             // Now the second triangle is to be drawn in yellow
