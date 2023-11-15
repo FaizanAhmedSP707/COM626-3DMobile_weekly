@@ -25,3 +25,6 @@ replay_pid*
 
 # Folder to create library project for Week 7 activities, not necessary to be on Git
 Week_7/OpenGL_WrapperLib/
+
+# Another directory that is a copy of another user's project on GitHub that cannot be pushed to
+Week_2/LifecycleMapsStarter/
