@@ -83,6 +83,9 @@ class OpenGLView(ctx: Context, aSet: AttributeSet): GLSurfaceView(ctx, aSet), GL
             // setting the view matrix to the identity matrix so that it has no effect initially.
             viewMatrix.setAsIdentityMatrix()
 
+            // Translation of the view matrix to see drawn shapes with new eye coordinates
+            viewMatrix.translate(0f, 0f, 2f)
+
             // Create a reference to the attribute variable aVertex
             val ref_aVertex = gpu.getAttribLocation("aVertex")
 
@@ -114,7 +117,6 @@ class OpenGLView(ctx: Context, aSet: AttributeSet): GLSurfaceView(ctx, aSet), GL
             * Alternatively, if our float array of vertices had 6 vertices specified, we could choose
             * to draw only the second triangle by providing 3,3 to the gpu call below.
             * */
-            viewMatrix.translate(2f, 2f, 2f)
             gpu.drawBufferedTriangles(0, 3) // The first triangle is to be done in blue
 
             // Now the second triangle is to be drawn in yellow
