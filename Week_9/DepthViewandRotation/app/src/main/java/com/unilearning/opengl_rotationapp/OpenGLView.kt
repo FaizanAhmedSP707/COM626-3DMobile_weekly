@@ -86,6 +86,9 @@ class OpenGLView(ctx: Context, aSet: AttributeSet): GLSurfaceView(ctx, aSet), GL
             // setting the view matrix to the identity matrix so that it has no effect initially.
             viewMatrix.setAsIdentityMatrix()
 
+            // Describing which axis should the camera be rotated around by changing the rotation value of the camera object
+            viewMatrix.rotateAboutAxis(-camera.rotation, 'y')
+
             // Translation of the view matrix to see drawn shapes with new eye coordinates
             viewMatrix.translate(-camera.position.x, -camera.position.y, -camera.position.z)
 
