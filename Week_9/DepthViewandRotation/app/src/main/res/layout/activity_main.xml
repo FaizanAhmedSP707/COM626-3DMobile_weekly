@@ -101,7 +101,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/minusX" />
+        app:layout_constraintTop_toBottomOf="@id/cwRotation" />
 
     <!-- ROTATE CW, ROTATE ACW, MV FORWARD, MV BACKWARD -->
 
