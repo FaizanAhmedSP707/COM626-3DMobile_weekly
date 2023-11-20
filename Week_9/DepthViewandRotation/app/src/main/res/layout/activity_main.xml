@@ -57,6 +57,43 @@
         app:layout_constraintLeft_toRightOf="@id/minusZ"
         app:layout_constraintRight_toRightOf="parent"  />
 
+    <Button
+        android:layout_width="0px"
+        android:layout_height="wrap_content"
+        android:id="@+id/cwRotation"
+        android:text="@string/cwRotation"
+        app:layout_constraintTop_toBottomOf="@id/minusX"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/acwRotation"/>
+
+    <Button
+        android:layout_width="0px"
+        android:layout_height="wrap_content"
+        android:id="@+id/acwRotation"
+        android:text="@string/acwRotation"
+        app:layout_constraintTop_toBottomOf="@id/minusY"
+        app:layout_constraintLeft_toRightOf="@id/cwRotation"
+        app:layout_constraintRight_toLeftOf="@id/forwardMovementInAngle"/>
+
+    <Button
+        android:layout_width="0px"
+        android:layout_height="wrap_content"
+        android:id="@+id/forwardMovementInAngle"
+        android:text="@string/fwdMovement"
+        app:layout_constraintTop_toBottomOf="@id/minusZ"
+        app:layout_constraintLeft_toRightOf="@id/acwRotation"
+        app:layout_constraintRight_toLeftOf="@id/backwardMovementInAngle"
+        />
+
+    <Button
+        android:layout_width="0px"
+        android:layout_height="wrap_content"
+        android:id="@+id/backwardMovementInAngle"
+        android:text="@string/bwdMovement"
+        app:layout_constraintTop_toBottomOf="@id/plusZ"
+        app:layout_constraintLeft_toRightOf="@id/forwardMovementInAngle"
+        app:layout_constraintRight_toRightOf="parent"/>
+
     <com.unilearning.opengl_rotationapp.OpenGLView
         android:layout_width="0px"
         android:layout_height="0px"
