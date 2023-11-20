@@ -4,6 +4,7 @@ import android.opengl.GLES20
 import android.opengl.GLSurfaceView
 import android.util.AttributeSet
 import android.util.Log
+import freemap.openglwrapper.Camera
 import freemap.openglwrapper.GLMatrix
 import freemap.openglwrapper.GPUInterface
 import freemap.openglwrapper.OpenGLUtils
@@ -27,6 +28,7 @@ class OpenGLView(ctx: Context, aSet: AttributeSet): GLSurfaceView(ctx, aSet), GL
 
     val blueCol = floatArrayOf(0.0f, 0.0f, 1.0f, 1.0f) // Global constant for drawing an opaque blue shape
     val yellowCol = floatArrayOf(1.0f, 1.0f, 0.0f, 1.0f) // Global constant for drawing an opaque yellow shape
+    val camera = Camera(0f,0f,0f)
 
     // Create a variable to hold the view matrix
     val viewMatrix = GLMatrix()
@@ -84,7 +86,7 @@ class OpenGLView(ctx: Context, aSet: AttributeSet): GLSurfaceView(ctx, aSet), GL
             viewMatrix.setAsIdentityMatrix()
 
             // Translation of the view matrix to see drawn shapes with new eye coordinates
-            viewMatrix.translate(0f, 0f, 2f)
+            viewMatrix.translate(-camera.position.x, -camera.position.y, -camera.position.z)
 
             // Create a reference to the attribute variable aVertex
             val ref_aVertex = gpu.getAttribLocation("aVertex")
