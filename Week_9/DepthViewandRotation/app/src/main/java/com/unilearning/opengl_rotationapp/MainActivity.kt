@@ -3,6 +3,7 @@ package com.unilearning.opengl_rotationapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +36,12 @@ class MainActivity : AppCompatActivity() {
         }
         findViewById<Button>(R.id.acwRotation).setOnClickListener {
             glView.camera.rotate(10f)
+        }
+        findViewById<Button>(R.id.forwardMovementInAngle).setOnClickListener {
+            Toast.makeText(this, "Move forward functionality not implemented yet", Toast.LENGTH_LONG).show()
+        }
+        findViewById<Button>(R.id.backwardMovementInAngle).setOnClickListener {
+            Toast.makeText(this, "Move backward functionality not implemented yet", Toast.LENGTH_LONG).show()
         }
     }
 }
