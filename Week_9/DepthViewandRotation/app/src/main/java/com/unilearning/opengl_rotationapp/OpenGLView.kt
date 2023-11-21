@@ -83,6 +83,12 @@ class OpenGLView(ctx: Context, aSet: AttributeSet): GLSurfaceView(ctx, aSet), GL
         // Run the below code only if the buffer is not null
         fbuf?.apply {
 
+            /*
+            * TODO: perform some trigonometric calculations here, namely getting the sine and
+            *  cosine values in the current angle that the camera is facing, so that the
+            *  'move forward' and 'move backward' functionality can be properly implemented
+            * */
+
             // setting the view matrix to the identity matrix so that it has no effect initially.
             viewMatrix.setAsIdentityMatrix()
 
