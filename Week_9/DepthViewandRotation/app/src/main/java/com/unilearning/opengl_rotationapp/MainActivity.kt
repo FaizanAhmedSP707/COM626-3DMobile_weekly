@@ -38,10 +38,18 @@ class MainActivity : AppCompatActivity() {
             glView.camera.rotate(10f)
         }
         findViewById<Button>(R.id.forwardMovementInAngle).setOnClickListener {
-            Toast.makeText(this, "Move forward functionality not implemented yet", Toast.LENGTH_LONG).show()
+            //Toast.makeText(this, "Move forward functionality not implemented yet", Toast.LENGTH_LONG).show()
+            var radian = (glView.camera.rotation * (Math.PI/180))
+            var negativeDZ = Math.cos(radian).toFloat()
+            var negativeDX = Math.sin(radian).toFloat()
+            glView.camera.translate(-negativeDX, 0f, -negativeDZ)
         }
         findViewById<Button>(R.id.backwardMovementInAngle).setOnClickListener {
-            Toast.makeText(this, "Move backward functionality not implemented yet", Toast.LENGTH_LONG).show()
+            //Toast.makeText(this, "Move backward functionality not implemented yet", Toast.LENGTH_LONG).show()
+            var radian = (glView.camera.rotation * (Math.PI/180))
+            var negDZ = Math.cos(radian).toFloat()
+            var negDX = Math.sin(radian).toFloat()
+            glView.camera.translate(negDX, 0f, negDZ)
         }
     }
 }
