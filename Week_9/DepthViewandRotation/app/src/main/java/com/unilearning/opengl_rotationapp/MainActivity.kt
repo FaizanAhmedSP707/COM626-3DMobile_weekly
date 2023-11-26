@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
             negativeDx = Math.sin(radian).toFloat()
             glView.camera.translate(-negativeDx, 0f, -negativeDx)
 
-            //glView.camera.rotateCamera(-1f)
+            //glView.camera.moveCamera(-1)
         }
         findViewById<Button>(R.id.backwardMovementInAngle).setOnClickListener {
             //Toast.makeText(this, "Move backward functionality not implemented yet", Toast.LENGTH_LONG).show()
@@ -57,10 +57,10 @@ class MainActivity : AppCompatActivity() {
             negativeDx = Math.sin(radian).toFloat()
             glView.camera.translate(negativeDx, 0f, negativeDz)
 
-            //glView.camera.rotateCamera(1f)
+            //glView.camera.moveCamera(1)
         }
     }
-    fun Camera.rotateCamera(mvValue: Float){
+    fun Camera.moveCamera(mvValue: Int){
         // extension function --> Not sure how to write
         radian = (findViewById<OpenGLView>(R.id.glview).camera.rotation * (Math.PI/180))
         negativeDz = mvValue * (Math.cos(radian).toFloat())
