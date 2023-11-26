@@ -4,8 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import freemap.openglwrapper.Camera
 
 class MainActivity : AppCompatActivity() {
+    private var radian: Double = 0.0
+    private var negativeDz : Float = 0.0f
+    private var negativeDx : Float = 0.0f
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -51,5 +55,12 @@ class MainActivity : AppCompatActivity() {
             var negDX = Math.sin(radian).toFloat()
             glView.camera.translate(negDX, 0f, negDZ)
         }
+    }
+    fun Camera.rotateCamera(mvValue: Float){
+        // extension function --> Not sure how to write
+        radian = (findViewById<OpenGLView>(R.id.glview).camera.rotation * (Math.PI/180))
+        negativeDz = mvValue * (Math.cos(radian).toFloat())
+        negativeDx = mvValue * (Math.sin(radian).toFloat())
+        findViewById<OpenGLView>(R.id.glview).camera.translate(negativeDx, 0f, negativeDz)
     }
 }
