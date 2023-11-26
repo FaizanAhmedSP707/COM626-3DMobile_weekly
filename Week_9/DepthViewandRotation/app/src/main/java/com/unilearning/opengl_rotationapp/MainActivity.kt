@@ -43,17 +43,21 @@ class MainActivity : AppCompatActivity() {
         }
         findViewById<Button>(R.id.forwardMovementInAngle).setOnClickListener {
             //Toast.makeText(this, "Move forward functionality not implemented yet", Toast.LENGTH_LONG).show()
-            var radian = (glView.camera.rotation * (Math.PI/180))
-            var negativeDZ = Math.cos(radian).toFloat()
-            var negativeDX = Math.sin(radian).toFloat()
-            glView.camera.translate(-negativeDX, 0f, -negativeDZ)
+            radian = (glView.camera.rotation * (Math.PI/180))
+            negativeDx = Math.cos(radian).toFloat()
+            negativeDx = Math.sin(radian).toFloat()
+            glView.camera.translate(-negativeDx, 0f, -negativeDx)
+
+            //glView.camera.rotateCamera(-1f)
         }
         findViewById<Button>(R.id.backwardMovementInAngle).setOnClickListener {
             //Toast.makeText(this, "Move backward functionality not implemented yet", Toast.LENGTH_LONG).show()
-            var radian = (glView.camera.rotation * (Math.PI/180))
-            var negDZ = Math.cos(radian).toFloat()
-            var negDX = Math.sin(radian).toFloat()
-            glView.camera.translate(negDX, 0f, negDZ)
+            radian = (glView.camera.rotation * (Math.PI/180))
+            negativeDz = Math.cos(radian).toFloat()
+            negativeDx = Math.sin(radian).toFloat()
+            glView.camera.translate(negativeDx, 0f, negativeDz)
+
+            //glView.camera.rotateCamera(1f)
         }
     }
     fun Camera.rotateCamera(mvValue: Float){
