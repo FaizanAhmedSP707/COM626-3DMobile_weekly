@@ -94,7 +94,7 @@
         app:layout_constraintLeft_toRightOf="@id/forwardMovementInAngle"
         app:layout_constraintRight_toRightOf="parent"/>
 
-    <com.unilearning.opengl_complexshapes
+    <com.unilearning.opengl_complexshapes.OpenGLView
         android:layout_width="0px"
         android:layout_height="0px"
         android:id="@+id/glview"
