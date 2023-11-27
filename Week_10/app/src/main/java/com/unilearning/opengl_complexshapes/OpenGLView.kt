@@ -11,6 +11,7 @@ import freemap.openglwrapper.GPUInterface
 import freemap.openglwrapper.OpenGLUtils
 import java.io.IOException
 import java.nio.FloatBuffer
+import java.nio.ShortBuffer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
@@ -27,8 +28,12 @@ class OpenGLView(ctx: Context, aSet: AttributeSet): GLSurfaceView(ctx, aSet), GL
 
     var fbuf: FloatBuffer? = null
 
+    private var squarebuf: FloatBuffer? = null
+    private var indexbuf: ShortBuffer? = null
+
     val blueCol = floatArrayOf(0.0f, 0.0f, 1.0f, 1.0f) // Global constant for drawing an opaque blue shape
     val yellowCol = floatArrayOf(1.0f, 1.0f, 0.0f, 1.0f) // Global constant for drawing an opaque yellow shape
+    private val greenCol = floatArrayOf(0.0f, 1.0f, 0.0f, 1.0f)
     val camera = Camera(0f,0f,0f)
 
     // Create a variable to hold the view matrix
@@ -61,6 +66,22 @@ class OpenGLView(ctx: Context, aSet: AttributeSet): GLSurfaceView(ctx, aSet), GL
                     -0.5f, 0f, -6f,
                     0.5f, 0f, -6f,
                     0f, 1f, -6f
+                )
+            )
+            // initialising the buffer for drawing our square
+            squarebuf = OpenGLUtils.makeFloatBuffer(
+                floatArrayOf(
+                    0f, 0f, -2f,
+                    1f, 0f, -2f,
+                    1f, 1f, -2f,
+                    0f, 1f, -2f
+                )
+            )
+
+            // Making an index buffer to point to the vertices that need to be drawn for our square
+            indexbuf = OpenGLUtils.makeShortBuffer(
+                shortArrayOf(
+                    0, 1, 2, 3, 2, 0
                 )
             )
             // Selects this shader program
