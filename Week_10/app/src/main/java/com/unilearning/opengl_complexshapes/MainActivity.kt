@@ -42,29 +42,29 @@ class MainActivity : AppCompatActivity() {
             glView.camera.rotate(10f)
         }
         findViewById<Button>(R.id.forwardMovementInAngle).setOnClickListener {
-            //Toast.makeText(this, "Move forward functionality not implemented yet", Toast.LENGTH_LONG).show()
+            /*Toast.makeText(this, "Move forward functionality not implemented yet", Toast.LENGTH_LONG).show()
             radian = (glView.camera.rotation * (Math.PI/180))
             negativeDz = Math.cos(radian).toFloat()
             negativeDx = Math.sin(radian).toFloat()
-            glView.camera.translate(-negativeDx, 0f, -negativeDz)
+            glView.camera.translate(-negativeDx, 0f, -negativeDz)*/
 
-            //glView.camera.moveCamera(-1)
+            glView.camera.moveCamera(-1)
         }
         findViewById<Button>(R.id.backwardMovementInAngle).setOnClickListener {
-            //Toast.makeText(this, "Move backward functionality not implemented yet", Toast.LENGTH_LONG).show()
+            /*Toast.makeText(this, "Move backward functionality not implemented yet", Toast.LENGTH_LONG).show()
             radian = (glView.camera.rotation * (Math.PI/180))
             negativeDz = Math.cos(radian).toFloat()
             negativeDx = Math.sin(radian).toFloat()
-            glView.camera.translate(negativeDx, 0f, negativeDz)
+            glView.camera.translate(negativeDx, 0f, negativeDz)*/
 
-            //glView.camera.moveCamera(1)
+            glView.camera.moveCamera(1)
         }
     }
-    fun Camera.moveCamera(mvValue: Int){
+    private fun Camera.moveCamera(mvValue: Int){
         // extension function --> Not sure how to write
-        radian = (findViewById<OpenGLView>(R.id.glview).camera.rotation * (Math.PI/180))
+        radian = this.rotation * (Math.PI/180)
         negativeDz = mvValue * (Math.cos(radian).toFloat())
         negativeDx = mvValue * (Math.sin(radian).toFloat())
-        findViewById<OpenGLView>(R.id.glview).camera.translate(negativeDx, 0f, negativeDz)
+        this.translate(negativeDx, 0f, negativeDz)
     }
 }
