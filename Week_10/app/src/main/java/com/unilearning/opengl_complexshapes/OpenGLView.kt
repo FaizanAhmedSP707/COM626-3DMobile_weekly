@@ -42,6 +42,8 @@ class OpenGLView(ctx: Context, aSet: AttributeSet): GLSurfaceView(ctx, aSet), GL
     // Create a variable to hold the projection matrix
     val projectionMatrix = GLMatrix()
 
+    var buffersInitialised = false
+
     // Setup code to run when the OpenGL view is first created
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
         // Sets the background colour
@@ -84,6 +86,8 @@ class OpenGLView(ctx: Context, aSet: AttributeSet): GLSurfaceView(ctx, aSet), GL
                     0, 1, 2, 3, 2, 0
                 )
             )
+
+            buffersInitialised = squarebuf != null && indexbuf != null && fbuf != null
             // Selects this shader program
             gpu.select()
         } catch(e: IOException) {
@@ -102,7 +106,7 @@ class OpenGLView(ctx: Context, aSet: AttributeSet): GLSurfaceView(ctx, aSet), GL
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
         // Run the below code only if the buffer is not null
-        fbuf?.apply {
+        if(buffersInitialised) {
 
             /*
             * TODO: perform some trigonometric calculations here, namely getting the sine and
@@ -136,7 +140,7 @@ class OpenGLView(ctx: Context, aSet: AttributeSet): GLSurfaceView(ctx, aSet), GL
 
             // Telling Android OpenGL ES 2.0 what format our data is in, and what shader variable will
             // receive the data
-            gpu.specifyBufferedDataFormat(ref_aVertex, this, 0)
+            gpu.specifyBufferedDataFormat(ref_aVertex, fbuf!!, 0)
 
             // For the stride value, either 0 or 12 will work. Stride refers to the number
             // of bytes separating one vertex's data from the other
