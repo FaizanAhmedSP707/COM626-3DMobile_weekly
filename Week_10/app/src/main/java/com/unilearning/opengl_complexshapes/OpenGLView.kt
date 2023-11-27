@@ -37,6 +37,8 @@ class OpenGLView(ctx: Context, aSet: AttributeSet): GLSurfaceView(ctx, aSet), GL
     val blueCol = floatArrayOf(0.0f, 0.0f, 1.0f, 1.0f) // Global constant for drawing an opaque blue shape
     val yellowCol = floatArrayOf(1.0f, 1.0f, 0.0f, 1.0f) // Global constant for drawing an opaque yellow shape
     private val greenCol = floatArrayOf(0.0f, 1.0f, 0.0f, 1.0f)
+    private val redCol = floatArrayOf(1.0f, 0.0f, 0.0f, 1.0f)
+    private val magentaCol = floatArrayOf(1.0f, 0.0f, 1.0f, 1.0f)
     val camera = Camera(0f,0f,0f)
 
     // Create a variable to hold the view matrix
@@ -172,6 +174,13 @@ class OpenGLView(ctx: Context, aSet: AttributeSet): GLSurfaceView(ctx, aSet), GL
             // Now the second triangle is to be drawn in yellow
             gpu.setUniform4FloatArray(ref_uColour, yellowCol)
             gpu.drawBufferedTriangles(3, 3)
+
+            // Drawing our cubes differently
+            gpu.setUniform4FloatArray(ref_uColour, redCol)
+            cube1?.render(gpu, ref_aVertex)
+
+            gpu.setUniform4FloatArray(ref_uColour, magentaCol)
+            cube2?.render(gpu, ref_aVertex)
         }
     }
     /*
