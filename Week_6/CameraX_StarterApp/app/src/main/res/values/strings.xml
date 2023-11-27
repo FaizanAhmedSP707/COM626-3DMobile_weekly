@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CameraX_App</string>
+    <string name="picTakeBtnText">Take Picture</string>
 </resources>
