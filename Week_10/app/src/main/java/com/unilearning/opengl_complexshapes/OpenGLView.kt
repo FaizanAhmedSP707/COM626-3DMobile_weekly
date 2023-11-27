@@ -28,6 +28,9 @@ class OpenGLView(ctx: Context, aSet: AttributeSet): GLSurfaceView(ctx, aSet), GL
 
     var fbuf: FloatBuffer? = null
 
+    private var cube1: Cube? = null
+    private var cube2: Cube? = null
+
     private var squarebuf: FloatBuffer? = null
     private var indexbuf: ShortBuffer? = null
 
@@ -58,6 +61,10 @@ class OpenGLView(ctx: Context, aSet: AttributeSet): GLSurfaceView(ctx, aSet), GL
             if(!success){
                 Log.d("opengl01Load", gpu.lastShaderError)
             }
+            // Create 2 different cubes at slightly different coordinates that will be drawn in our OpenGLView
+            cube1 = Cube(3f, 0f, 0f)
+            cube2 = Cube(-3f, 0f, 0f)
+
             // If the loading is successful, then initialise the FloatBuffer with X,Y and Z coordinates
             // in order to make a flat shape appear on the screen.
             fbuf = OpenGLUtils.makeFloatBuffer(
@@ -134,6 +141,12 @@ class OpenGLView(ctx: Context, aSet: AttributeSet): GLSurfaceView(ctx, aSet), GL
 
             gpu.sendMatrix(refUView, viewMatrix)
             gpu.sendMatrix(refUProj, projectionMatrix)
+
+            /*
+            * Code for drawing our square goes here!
+            * */
+            gpu.setUniform4FloatArray(ref_uColour, greenCol)
+            gpu.drawIndexedBufferedData(squarebuf!!, indexbuf!!, 0, ref_aVertex)
 
             // Sending data to the shader
             gpu.setUniform4FloatArray(ref_uColour, blueCol)
