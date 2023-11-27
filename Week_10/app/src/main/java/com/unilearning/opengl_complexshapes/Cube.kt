@@ -29,7 +29,7 @@ class Cube(val x: Float, val y: Float, val z: Float) {
         )
     }
 
-    private fun render(gpuRef: GPUInterface, aVertexRef: Int) {
+    fun render(gpuRef: GPUInterface, aVertexRef: Int) {
         gpuRef.drawIndexedBufferedData(vertexBuf, indexBuf, 0, aVertexRef)
     }
 }
