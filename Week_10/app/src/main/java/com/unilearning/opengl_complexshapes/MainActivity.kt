@@ -44,9 +44,9 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.forwardMovementInAngle).setOnClickListener {
             //Toast.makeText(this, "Move forward functionality not implemented yet", Toast.LENGTH_LONG).show()
             radian = (glView.camera.rotation * (Math.PI/180))
-            negativeDx = Math.cos(radian).toFloat()
+            negativeDz = Math.cos(radian).toFloat()
             negativeDx = Math.sin(radian).toFloat()
-            glView.camera.translate(-negativeDx, 0f, -negativeDx)
+            glView.camera.translate(-negativeDx, 0f, -negativeDz)
 
             //glView.camera.moveCamera(-1)
         }
