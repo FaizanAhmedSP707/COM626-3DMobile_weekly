@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:layout_width="0px"
+        android:layout_height="wrap_content"
+        android:id="@+id/minusX"
+        android:text="@string/minusX"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/plusX" />
+    <Button
+        android:layout_width="0px"
+        android:layout_height="wrap_content"
+        android:id="@+id/plusX"
+        android:text="@string/plusX"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/minusX"
+        app:layout_constraintRight_toLeftOf="@id/minusY" />
+    <Button
+        android:layout_width="0px"
+        android:layout_height="wrap_content"
+        android:id="@+id/minusY"
+        android:text="@string/minusY"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/plusX"
+        app:layout_constraintRight_toLeftOf="@id/plusY" />
+    <Button
+        android:layout_width="0px"
+        android:layout_height="wrap_content"
+        android:id="@+id/plusY"
+        android:text="@string/plusY"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/minusY"
+        app:layout_constraintRight_toLeftOf="@id/minusZ" />
+
+    <Button
+        android:layout_width="0px"
+        android:layout_height="wrap_content"
+        android:id="@+id/minusZ"
+        android:text="@string/minusZ"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/plusY"
+        app:layout_constraintRight_toLeftOf="@id/plusZ" />
+
+    <Button
+        android:layout_width="0px"
+        android:layout_height="wrap_content"
+        android:id="@+id/plusZ"
+        android:text="@string/plusZ"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/minusZ"
+        app:layout_constraintRight_toRightOf="parent"  />
+
+    <Button
+        android:layout_width="0px"
+        android:layout_height="wrap_content"
+        android:id="@+id/cwRotation"
+        android:text="@string/cwRotation"
+        app:layout_constraintTop_toBottomOf="@id/minusX"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/acwRotation"/>
+
+    <Button
+        android:layout_width="0px"
+        android:layout_height="wrap_content"
+        android:id="@+id/acwRotation"
+        android:text="@string/acwRotation"
+        app:layout_constraintTop_toBottomOf="@id/minusY"
+        app:layout_constraintLeft_toRightOf="@id/cwRotation"
+        app:layout_constraintRight_toLeftOf="@id/forwardMovementInAngle"/>
+
+    <Button
+        android:layout_width="0px"
+        android:layout_height="wrap_content"
+        android:id="@+id/forwardMovementInAngle"
+        android:text="@string/fwdMovement"
+        app:layout_constraintTop_toBottomOf="@id/minusZ"
+        app:layout_constraintLeft_toRightOf="@id/acwRotation"
+        app:layout_constraintRight_toLeftOf="@id/backwardMovementInAngle"
+        />
+
+    <Button
+        android:layout_width="0px"
+        android:layout_height="wrap_content"
+        android:id="@+id/backwardMovementInAngle"
+        android:text="@string/bwdMovement"
+        app:layout_constraintTop_toBottomOf="@id/plusZ"
+        app:layout_constraintLeft_toRightOf="@id/forwardMovementInAngle"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <com.unilearning.opengl_complexshapes
+        android:layout_width="0px"
+        android:layout_height="0px"
+        android:id="@+id/glview"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cwRotation" />
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

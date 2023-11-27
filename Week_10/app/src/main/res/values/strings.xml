@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">OpenGL_ComplexShapes</string>
+    <string name="minusX">-X</string>
+    <string name="plusX">+X</string>
+    <string name="minusY">-Y</string>
+    <string name="plusY">+Y</string>
+    <string name="minusZ">-Z</string>
+    <string name="plusZ">+Z</string>
+    <string name="cwRotation">Clockwise</string>
+    <string name="acwRotation">Anticlockwise</string>
+    <string name="fwdMovement">Forward</string>
+    <string name="bwdMovement">Backward</string>
+</resources>
