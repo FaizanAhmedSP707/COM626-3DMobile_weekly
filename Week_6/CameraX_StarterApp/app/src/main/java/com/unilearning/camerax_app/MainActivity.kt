@@ -1,6 +1,8 @@
 package com.unilearning.camerax_app
 
+import android.Manifest
 import android.content.ContentValues
+import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,15 +16,41 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
     // An image capture object that we will need for when the image is captured
     var imageCapture : ImageCapture? = null
+    private var permissionGranted = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+    }
+    private fun requestPermissions() {
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 0)
+        } else {
+            // If the permission was already granted before, set the boolean variable to true
+            permissionGranted = true
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if(requestCode == 0 && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            // Set the permissionGranted variable to true
+            permissionGranted = true
+        } else {
+            AlertDialog.Builder(this).setPositiveButton("OK", null)
+                .setMessage("Camera permission denied").show()
+            permissionGranted = false
+        }
     }
 
     private fun startCamera() {
