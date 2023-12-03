@@ -9,6 +9,8 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
+import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
@@ -27,6 +29,30 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val pictureTakeBtn = findViewById<Button>(R.id.takePicBtn)
+
+        // Function call to request permissions
+        requestPermissions()
+
+        // Check if Camera permission granted and start the camera
+        if(permissionGranted) {
+            startCamera()
+        } else {
+            // Tell the user that the app can't carry out its' intended function
+            AlertDialog.Builder(this).setPositiveButton("OK", null)
+                .setMessage("You need to grant permissions for the app to work. Please close the app and try again.").show()
+        }
+
+        // Prevent a possible exception when the user clicks on the button
+        if(permissionGranted) {
+            pictureTakeBtn.setOnClickListener {
+                Toast.makeText(this, "Functionality not implemented yet", Toast.LENGTH_LONG).show()
+            }
+        } else {
+            AlertDialog.Builder(this).setPositiveButton("OK", null)
+                .setMessage("You cannot take a picture at the moment as you haven't\ngranted permission to use the camera").show()
+        }
     }
     private fun requestPermissions() {
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
