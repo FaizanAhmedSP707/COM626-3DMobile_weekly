@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.unilearning.camerax_app"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.unilearning.camerax_app"
