@@ -13,7 +13,7 @@ import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
     // An image capture object that we will need for when the image is captured
-    val imageCapture : ImageCapture? = null
+    var imageCapture : ImageCapture? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         val lifecycleOwner = this
         val previewCam = findViewById<PreviewView>(R.id.previewCamView)
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
+        imageCapture = ImageCapture.Builder().build()
         cameraProviderFuture.addListener(
             {
                 val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
@@ -46,5 +47,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }, ContextCompat.getMainExecutor(this)
         )
+    }
+
+    private fun takePicture() {
+        imageCapture?.apply {
+
+        }
     }
 }
