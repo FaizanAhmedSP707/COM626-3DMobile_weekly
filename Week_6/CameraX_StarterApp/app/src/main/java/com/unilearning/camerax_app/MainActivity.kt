@@ -25,7 +25,7 @@ import java.io.File
 class MainActivity : AppCompatActivity() {
     // An image capture object that we will need for when the image is captured
     var imageCapture : ImageCapture? = null
-    private var permissionGranted = false
+    private var permissionGranted: Boolean? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         requestPermissions()
 
         // Check if Camera permission granted and start the camera
-        if(permissionGranted) {
+        if(permissionGranted!!) {
             startCamera()
         } else {
             // Tell the user that the app can't carry out its' intended function
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Prevent a possible exception when the user clicks on the button
-        if(permissionGranted) {
+        if(permissionGranted!!) {
             pictureTakeBtn.setOnClickListener {
                 Toast.makeText(this, "Functionality not implemented yet", Toast.LENGTH_LONG).show()
             }
