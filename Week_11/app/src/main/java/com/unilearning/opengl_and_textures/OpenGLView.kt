@@ -101,8 +101,7 @@ class OpenGLView(ctx: Context, val textureAvailableCallback: (SurfaceTexture) ->
             )
 
             buffersInitialised = squarebuf != null && indexbuf != null && fbuf != null
-            // Selects this shader program
-            gpu.select()
+
         } catch(e: IOException) {
             // This code involves loading files, so we need to handle the appropriate exception
             Log.d("opengl01Load", e.stackTraceToString())
@@ -154,6 +153,8 @@ class OpenGLView(ctx: Context, val textureAvailableCallback: (SurfaceTexture) ->
             // Translation of the view matrix to see drawn shapes with new eye coordinates
             viewMatrix.translate(-camera.position.x, -camera.position.y, -camera.position.z)
 
+            // Selects this shader program
+            gpu.select()
             // Create a reference to the attribute variable aVertex
             val ref_aVertex = gpu.getAttribLocation("aVertex")
 
