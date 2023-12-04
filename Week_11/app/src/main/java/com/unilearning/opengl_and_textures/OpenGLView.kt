@@ -52,9 +52,18 @@ class OpenGLView(ctx: Context, val textureAvailableCallback: (SurfaceTexture) ->
     val projectionMatrix = GLMatrix()
 
     var buffersInitialised = false
+    private var textureBuffersInitialised = false
+    private var surfaceTexture: SurfaceTexture? = null
 
     // Setup code to run when the OpenGL view is first created
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
+        val textureId = OpenGLUtils.genTexture()
+        if(textureId != 0){
+            OpenGLUtils.bindTextureToTextureUnit(textureId, GLES20.GL_TEXTURE0, OpenGLUtils.GL_TEXTURE_EXTERNAL_OES)
+
+            surfaceTexture = SurfaceTexture(textureId)
+            textureAvailableCallback(surfaceTexture!!)
+        }
         // Sets the background colour
         GLES20.glClearColor(0f,0f,0f, 1f) // alpha decides the transparency
 
@@ -121,6 +130,27 @@ class OpenGLView(ctx: Context, val textureAvailableCallback: (SurfaceTexture) ->
             if(!success3){
                 Log.d("opengl03Load", gpu3.lastShaderError)
             }
+            // Vertex coordinates for our flat triangles
+            texfbuf = OpenGLUtils.makeFloatBuffer(
+                floatArrayOf(
+                    -1f, -1f, 0f,
+                    1f, -1f, 0f,
+                    1f, 1f, 0f,
+                    -1f, 1f, 0f
+                )
+            )
+            // Index buffer to draw the triangles by referring to their indices
+            texIndexBuf = OpenGLUtils.makeShortBuffer(
+                shortArrayOf(
+                    0, 1, 2, 2, 3, 0
+                )
+            )
+            textureBuffersInitialised = (texfbuf != null && texIndexBuf != null)
+
+            gpu3.select()
+            val refTextureUnit = gpu3.getUniformLocation("uTexture")
+            gpu3.setUniformInt(refTextureUnit, 0)
+
         } catch (error: IOException){
             Log.d("opengl03Load", error.stackTraceToString())
         }
@@ -134,6 +164,16 @@ class OpenGLView(ctx: Context, val textureAvailableCallback: (SurfaceTexture) ->
     override fun onDrawFrame(gl: GL10?) {
         // Clears any previous settings from the previous frame
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
+
+        if(textureBuffersInitialised){
+            // Update the surface texture with the latest frame from the camera
+            surfaceTexture?.updateTexImage()
+
+            // Draw the triangles here
+            gpu3.select()
+            val ref_textaVertex = gpu3.getAttribLocation("aVertex")
+            gpu3.drawIndexedBufferedData(texfbuf!!, texIndexBuf!!, 0, ref_textaVertex)
+        }
 
         // Run the below code only if the buffer is not null
         if(buffersInitialised) {
