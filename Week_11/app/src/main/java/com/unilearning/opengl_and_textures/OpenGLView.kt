@@ -24,16 +24,19 @@ class OpenGLView(ctx: Context, val textureAvailableCallback: (SurfaceTexture) ->
         setRenderer(this)
     }
 
+    private val gpu3 = GPUInterface("primary shader")
     val gpu = GPUInterface("default shader")
     val gpu2 = GPUInterface("secondary shader")
 
     var fbuf: FloatBuffer? = null
+    private var texfbuf: FloatBuffer? = null // For our texture shader to draw 2 triangles without depth
 
     private var cube1: Cube? = null
     private var cube2: Cube? = null
 
     private var squarebuf: FloatBuffer? = null
     private var indexbuf: ShortBuffer? = null
+    private var texIndexBuf: ShortBuffer? = null
 
     val blueCol = floatArrayOf(0.0f, 0.0f, 1.0f, 1.0f) // Global constant for drawing an opaque blue shape
     val yellowCol = floatArrayOf(1.0f, 1.0f, 0.0f, 1.0f) // Global constant for drawing an opaque yellow shape
@@ -112,6 +115,15 @@ class OpenGLView(ctx: Context, val textureAvailableCallback: (SurfaceTexture) ->
             }
         } catch (e: IOException){
             Log.d("opengl02Load", e.stackTraceToString())
+        }
+
+        try {
+            val success3 = gpu3.loadShaders(context.assets, "vertex3.glsl", "fragment3.glsl")
+            if(!success3){
+                Log.d("opengl03Load", gpu3.lastShaderError)
+            }
+        } catch (error: IOException){
+            Log.d("opengl03Load", error.stackTraceToString())
         }
     }
 
