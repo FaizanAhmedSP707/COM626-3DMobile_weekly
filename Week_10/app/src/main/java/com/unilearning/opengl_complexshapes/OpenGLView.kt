@@ -25,6 +25,7 @@ class OpenGLView(ctx: Context, aSet: AttributeSet): GLSurfaceView(ctx, aSet), GL
     }
 
     val gpu = GPUInterface("default shader")
+    val gpu2 = GPUInterface("secondary shader")
 
     var fbuf: FloatBuffer? = null
 
@@ -102,6 +103,15 @@ class OpenGLView(ctx: Context, aSet: AttributeSet): GLSurfaceView(ctx, aSet), GL
         } catch(e: IOException) {
             // This code involves loading files, so we need to handle the appropriate exception
             Log.d("opengl01Load", e.stackTraceToString())
+        }
+
+        try {
+            val success2 = gpu2.loadShaders(context.assets, "vertex2.glsl", "fragment2.glsl")
+            if(!success2){
+                Log.d("opengl02Load", gpu2.lastShaderError)
+            }
+        } catch (e: IOException){
+            Log.d("opengl02Load", e.stackTraceToString())
         }
     }
 
