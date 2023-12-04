@@ -1,9 +1,9 @@
 package com.unilearning.opengl_and_textures
 
 import android.content.Context
+import android.graphics.SurfaceTexture
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
-import android.util.AttributeSet
 import android.util.Log
 import freemap.openglwrapper.Camera
 import freemap.openglwrapper.GLMatrix
@@ -17,7 +17,7 @@ import javax.microedition.khronos.opengles.GL10
 
 // Our GLSurfaceView for rendering the 3D world.
 
-class OpenGLView(ctx: Context, aSet: AttributeSet): GLSurfaceView(ctx, aSet), GLSurfaceView.Renderer {
+class OpenGLView(ctx: Context, val textureAvailableCallback: (SurfaceTexture) -> Unit): GLSurfaceView(ctx), GLSurfaceView.Renderer {
 
     init {
         setEGLContextClientVersion(2) // use GL ES version 2
