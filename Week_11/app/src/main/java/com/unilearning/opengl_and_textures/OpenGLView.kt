@@ -166,6 +166,9 @@ class OpenGLView(ctx: Context, val textureAvailableCallback: (SurfaceTexture) ->
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
         if(textureBuffersInitialised){
+            // Disable depth testing before drawing the camera feed
+            GLES20.glDisable(GLES20.GL_DEPTH_TEST)
+
             // Update the surface texture with the latest frame from the camera
             surfaceTexture?.updateTexImage()
 
@@ -173,6 +176,9 @@ class OpenGLView(ctx: Context, val textureAvailableCallback: (SurfaceTexture) ->
             gpu3.select()
             val ref_textaVertex = gpu3.getAttribLocation("aVertex")
             gpu3.drawIndexedBufferedData(texfbuf!!, texIndexBuf!!, 0, ref_textaVertex)
+
+            // Re-enable depth testing after drawing the camera feed
+            GLES20.glEnable(GLES20.GL_DEPTH_TEST)
         }
 
         // Run the below code only if the buffer is not null
