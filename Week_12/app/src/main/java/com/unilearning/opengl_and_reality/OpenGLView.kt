@@ -46,10 +46,14 @@ class OpenGLView(ctx: Context, val textureAvailableCallback: (SurfaceTexture) ->
     val camera = Camera(0f,0f,0f)
 
     // Create a variable to hold the view matrix
-    val viewMatrix = GLMatrix()
+    var viewMatrix = GLMatrix()
 
     // Create a variable to hold the projection matrix
     val projectionMatrix = GLMatrix()
+
+    // For representing the current orientation matrix that will be changed to the correct version
+    // when a new sensor reading is obtained
+    var orientationMatrix = GLMatrix()
 
     var buffersInitialised = false
     private var textureBuffersInitialised = false
@@ -192,6 +196,12 @@ class OpenGLView(ctx: Context, val textureAvailableCallback: (SurfaceTexture) ->
 
             // setting the view matrix to the identity matrix so that it has no effect initially.
             viewMatrix.setAsIdentityMatrix()
+
+            // Initialise the view matrix to a clone of the orientation matrix
+            viewMatrix = orientationMatrix.clone()
+
+            // Method call to set the view matrix to the correct sensor matrix
+            viewMatrix.correctSensorMatrix()
 
             // Describing which axis should the camera be rotated around by changing the rotation value of the camera object
             viewMatrix.rotateAboutAxis(-camera.rotation, 'y')
