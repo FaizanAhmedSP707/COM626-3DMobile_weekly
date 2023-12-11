@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.unilearning.opengl_and_reality"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.unilearning.opengl_and_reality"
