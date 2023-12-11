@@ -18,10 +18,26 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import android.Manifest
 import freemap.openglwrapper.Camera
+import android.hardware.SensorEventListener
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorManager
+import android.content.Context
+import freemap.openglwrapper.GLMatrix
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SensorEventListener {
+    // Declaring our sensor variables as attributes of the Main Activity
+    private var accel: Sensor? = null
+    private var magField: Sensor? = null
+
+    // Declaring the FloatArrays and a Matrix for usage
+    private var accelValues = FloatArray(3)
+    private var magValues = FloatArray(3)
+    private val orientationMatrix = FloatArray(16)
+    private val remappedMatrix = FloatArray(16)
+
     // An image capture object that we will need for when the image is captured
-    private var permissionGranted: Boolean? = null
+    private var permissionGranted: Boolean = false
     private var surfaceTexture: SurfaceTexture? = null
     lateinit var glView: OpenGLView
 
@@ -36,6 +52,18 @@ class MainActivity : AppCompatActivity() {
             requestPermissions()
         }
         setContentView(glView)
+
+        // Creating a sensor manager and initialising our sensors properly
+        val sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        accel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        magField = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
+
+        // Registering the listeners for these sensors
+        sensorManager.registerListener(this, accel, SensorManager.SENSOR_DELAY_UI)
+        sensorManager.registerListener(this, magField, SensorManager.SENSOR_DELAY_UI)
+        /*Remember that sensors should be paused when the app is paused, and unbound from
+        * the app when it is stopped so that the app doesn't eat up the device's resources
+        * and thus cause battery drain.*/
 
         /*
         // Creating a reference to the GLView class so that the camera can be manipulated
@@ -149,5 +177,30 @@ class MainActivity : AppCompatActivity() {
                 }
             }, ContextCompat.getMainExecutor(this)
         )
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+        // Leave blank, normally we don't do much here unless we have to do something
+    }
+
+    override fun onSensorChanged(ev: SensorEvent) {
+        if(ev.sensor == accel) {
+            accelValues = ev.values.copyOf()
+        }
+        else if(ev.sensor == magField) {
+            magValues = ev.values.copyOf()
+        }
+
+        // Calculate the rotation matrix
+        SensorManager.getRotationMatrix(orientationMatrix, null, magValues, accelValues)
+
+        // Remap the coordinate system as we're working in landscape mode
+        SensorManager.remapCoordinateSystem(orientationMatrix,
+                                            SensorManager.AXIS_Y,
+                                            SensorManager.AXIS_MINUS_X,
+                                            remappedMatrix)
+
+        // Changed the glView's orientation matrix to the correct one
+        glView.orientationMatrix = GLMatrix(remappedMatrix)
     }
 }
