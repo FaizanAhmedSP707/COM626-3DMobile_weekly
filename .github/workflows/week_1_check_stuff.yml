@@ -24,6 +24,9 @@ jobs:
           run: |
             cd Week_2
             cd LifecycleObserverStatus
+        
+        - name: List files in new directory
+          run: ls -A
 
         - name: Grant execution permissions to Gradlew
           run: chmod +x gradlew
