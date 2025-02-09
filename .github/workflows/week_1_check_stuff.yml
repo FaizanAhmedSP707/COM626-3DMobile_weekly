@@ -22,7 +22,8 @@ jobs:
 
         - name: Change directory to the required one
           run: |
-            cd Week_2
+            ls -A
+          working-directory: Week_2
 
         - name: Grant execution permissions to Gradlew
           run: chmod +x gradlew
