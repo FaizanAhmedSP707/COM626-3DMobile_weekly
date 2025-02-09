@@ -27,12 +27,11 @@ jobs:
 
         - name: Change directory again to THE REQUIRED ONE
           run: |
+            cd LifecycleObserverStatus
             ls -A
-          working-directory: LifecycleObserverStatus
 
         - name: Grant execution permissions to Gradlew
           run: chmod +x gradlew
-          working-directory: LifecycleObserverStatus
         
         - name: Build with Gradle
           run: ./gradlew clean build
