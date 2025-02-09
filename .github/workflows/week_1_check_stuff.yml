@@ -1,0 +1,35 @@
+name: Week 1 Actions
+run-name: Actions for Week 2
+on: [push]
+jobs:
+  Check compilation for Week 2 code:
+      runs-on: ubuntu-latest
+      steps:
+        - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+
+        - name: Checkout repository code
+          uses: actions/checkout@v4
+
+        - name: List files in the repository
+          run: |
+            ls ${{ github.workspace }}
+
+        - name: Set up Java JDK
+          uses: actions/setup-java@v4
+          with:
+            distribution: 'temurin'
+            java-version: '17'
+
+        - name: Change directory to the required one
+          run: |
+            cd Week_2
+            cd LifecycleObserverStatus
+
+        - name: Grant execution permissions to Gradlew
+          run: chmod +x gradlew
+        
+        - name: Build with Gradle
+          run: ./gradlew clean build
+
+        - name: Run unit tests
+          run: ./gradlew test -i -verbose
