@@ -1,8 +1,8 @@
-name: Week 1 Actions
+name: Week 2 Actions
 run-name: Actions for Week 2
 on: [push]
 jobs:
-  Check compilation for Week 2 code:
+  Check-compilation-for-Week-2-code:
       runs-on: ubuntu-latest
       steps:
         - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
