@@ -23,7 +23,6 @@ jobs:
         - name: Change directory to the required one
           run: |
             cd Week_2
-            cd LifecycleObserverStatus
 
         - name: Grant execution permissions to Gradlew
           run: chmod +x gradlew
