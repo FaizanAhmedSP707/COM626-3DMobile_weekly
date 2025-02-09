@@ -26,9 +26,8 @@ jobs:
           working-directory: Week_2
 
         - name: Change directory again to THE REQUIRED ONE
-          uses: actions/checkout@v4
           run: |
-            cd LifecycleObserverStatus
+            cd ./LifecycleObserverStatus
             ls -A
 
         - name: Grant execution permissions to Gradlew
