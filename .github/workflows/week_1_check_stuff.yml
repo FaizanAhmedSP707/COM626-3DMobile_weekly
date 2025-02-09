@@ -26,15 +26,22 @@ jobs:
           working-directory: Week_2
 
         - name: Change directory again to THE REQUIRED ONE
+          working-directory: Week_2
           run: |
-            cd ./LifecycleObserverStatus
-            ls -A
+            pwd
+            cd LifecycleObserverStatus
+            ls -la
 
         - name: Grant execution permissions to Gradlew
-          run: chmod +x gradlew
+          working-directory: Week_2/LifecycleObserverStatus
+          run: |
+            pwd
+            sudo chmod +x gradlew
         
         - name: Build with Gradle
+          working-directory: Week_2/LifecycleObserverStatus
           run: ./gradlew clean build
 
         - name: Run unit tests
+          working-directory: Week_2/LifecycleObserverStatus
           run: ./gradlew test -i -verbose
