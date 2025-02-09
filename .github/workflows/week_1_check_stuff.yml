@@ -33,7 +33,9 @@ jobs:
             ls -la
 
         - name: Grant execution permissions to Gradlew
-          run: chmod +x gradlew
+          run: |
+            pwd
+            sudo chmod +x gradlew
         
         - name: Build with Gradle
           run: ./gradlew clean build
