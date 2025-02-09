@@ -37,10 +37,6 @@ jobs:
           run: |
             pwd
             sudo chmod +x gradlew
-
-        - name: Generate gradle wrapper
-          working-directory: Week_2/LifecycleObserverStatus
-          run: ./gradlew wrapper
         
         - name: Build with Gradle
           working-directory: Week_2/LifecycleObserverStatus
