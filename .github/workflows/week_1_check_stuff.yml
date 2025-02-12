@@ -46,6 +46,6 @@ jobs:
           working-directory: Week_2/LifecycleObserverStatus
           run: |
             pwd
-            cd app/build
+            cd app/build/outputs
             ls -la
             ./gradlew test -i -verbose -b ./app/build/
