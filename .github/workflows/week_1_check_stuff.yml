@@ -46,4 +46,4 @@ jobs:
           working-directory: Week_2/LifecycleObserverStatus
           run: |
             pwd
-            ./gradlew -b app/build.gradle.kts test -i -v
+            ./gradlew -b app/build.gradle.kts test -i
