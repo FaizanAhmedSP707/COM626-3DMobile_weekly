@@ -44,4 +44,4 @@ jobs:
 
         - name: Run unit tests
           working-directory: Week_2/LifecycleObserverStatus
-          run: ./gradlew test -i -verbose
+          run: ./gradlew test -i -verbose -b ./app/build/
